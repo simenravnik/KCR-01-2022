@@ -1,8 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import CarCard from '../elements/CarCard';
 
 function Home() {
+
+  const [activeCardId, setActiveCardId] = React.useState("");
+
   return (
     <React.Fragment>
       <Head>
@@ -13,8 +17,20 @@ function Home() {
 
         <h1 className="font-alfa font-regular leading-tight text-5xl mt-0 mb-2">AVTEK.si</h1>
 
-        <div className='my-4 w-full flex-wrap flex justify-center'>
-          <img class="object-cover h-48 w-96" src='/images/car.png' />
+        <div class="grid grid-cols-3 gap-4">
+          {[
+            { id: "1", title: "OSNOVNI", src: "/images/car-normal.png" },
+            { id: "2", title: "ŠPORTNIK", src: "/images/car-fast.png" },
+            { id: "3", title: "SUV", src: "/images/car-suv.png" }
+          ].map(card => (
+            <CarCard
+              id={card.id}
+              title={card.title}
+              src={card.src}
+              activeCardId={activeCardId}
+              setActiveCardId={setActiveCardId}
+            />
+          ))}
         </div>
 
         <div className="card shadow-2xl">

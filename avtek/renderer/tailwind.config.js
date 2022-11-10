@@ -12,7 +12,12 @@ module.exports = {
       gray: colors.gray,
       blue: colors.blue,
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        'montserrat': ['Montserrat'],
+        'alfa': ['Alfa Slab One'],
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {

@@ -9,19 +9,67 @@ function Home() {
         <title>Avtek</title>
       </Head>
 
-      <div class="container mx-auto px-2">
+      <div class="container mx-auto px-2 py-5">
 
-        <h1 className="font-medium leading-tight text-5xl mt-0 mb-2">Avtek</h1>
+        <h1 className="font-alfa font-regular leading-tight text-5xl mt-0 mb-2">AVTEK.si</h1>
 
-        <div className="card shadow-xl">
+        <div className='my-4 w-full flex-wrap flex justify-center'>
+          <img class="object-cover h-48 w-96" src='/images/car.png' />
+        </div>
+
+        <div className="card shadow-2xl">
           <div className="card-body">
-            <h2 className="card-title">Personal information</h2>
+            <h2 className="card-title">Osebni podatki</h2>
+            <div class="grid gap-6 gap-x-20 mb-12 md:grid-cols-2">
+              <div>
+                <label for="first_name" class="block mb-2 text-sm font-medium">Ime</label>
+                <input type="text" id="first_name" class="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Name" required />
+              </div>
 
-            <div>
-              <label for="first_name" class="block mb-2 text-sm font-medium">First name</label>
-              <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="John" required />
+              <div>
+                <label for="last_name" class="block mb-2 text-sm font-medium">Datum rojstva</label>
+                <div class="flex flex-row">
+                  <div class="basis-1/4 mr-2">
+                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                      <option disabled selected>Dan</option>
+                      <option>1</option>
+                    </select>
+                  </div>
+                  <div class="basis-1/4 mr-2">
+                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                      <option disabled selected>Mesec</option>
+                      <option>Januar</option>
+                    </select>
+                  </div>
+                  <div class="basis-1/2">
+                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                      <option disabled selected>Leto</option>
+                      <option>1998</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="last_name" class="block mb-2 text-sm font-medium">Priimek</label>
+                <input type="text" id="first_name" class="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Surname" required />
+              </div>
+
+              <div>
+                <label for="last_name" class="block mb-2 text-sm font-medium">Spol</label>
+                <div class="flex flex-row">
+                  <label className="label cursor-pointer mr-2 p-2.5">
+                    <span className="label-text mr-1">Moški</span>
+                    <input type="radio" name="radio-10" className="radio" />
+                  </label>
+                  <label className="label cursor-pointer">
+                    <span className="label-text mr-1">Ženska</span>
+                    <input type="radio" name="radio-10" className="radio" />
+                  </label>
+                </div>
+              </div>
+
             </div>
-
           </div>
         </div>
       </div>
@@ -47,7 +95,7 @@ function Home() {
           <span className="btm-nav-label">Statics</span>
         </button>
       </div>
-    </React.Fragment>
+    </React.Fragment >
   );
 }
 

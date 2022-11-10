@@ -13,17 +13,18 @@ function Home() {
         <title>Avtek</title>
       </Head>
 
-      <div class="container mx-auto px-2 py-5">
+      <div className="container mx-auto px-2 py-5">
 
         <h1 className="font-alfa font-regular leading-tight text-5xl mt-0 mb-2">AVTEK.si</h1>
 
-        <div class="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {[
             { id: "1", title: "OSNOVNI", src: "/images/car-normal.png" },
             { id: "2", title: "ŠPORTNIK", src: "/images/car-fast.png" },
             { id: "3", title: "SUV", src: "/images/car-suv.png" }
           ].map(card => (
             <CarCard
+              key={card.id}
               id={card.id}
               title={card.title}
               src={card.src}
@@ -36,30 +37,30 @@ function Home() {
         <div className="card shadow-2xl">
           <div className="card-body">
             <h2 className="card-title">Osebni podatki</h2>
-            <div class="grid gap-6 gap-x-20 mb-12 md:grid-cols-2">
+            <div className="grid gap-6 gap-x-20 mb-12 md:grid-cols-2">
               <div>
-                <label for="first_name" class="block mb-2 text-sm font-medium">Ime</label>
-                <input type="text" id="first_name" class="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Name" required />
+                <label className="block mb-2 text-sm font-medium">Ime</label>
+                <input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Name" required />
               </div>
 
               <div>
-                <label for="last_name" class="block mb-2 text-sm font-medium">Datum rojstva</label>
-                <div class="flex flex-row">
-                  <div class="basis-1/4 mr-2">
-                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                      <option disabled selected>Dan</option>
+                <label className="block mb-2 text-sm font-medium">Datum rojstva</label>
+                <div className="flex flex-row">
+                  <div className="basis-1/4 mr-2">
+                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Dan"}>
+                      <option disabled>Dan</option>
                       <option>1</option>
                     </select>
                   </div>
-                  <div class="basis-1/4 mr-2">
-                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                      <option disabled selected>Mesec</option>
+                  <div className="basis-1/4 mr-2">
+                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Mesec"}>
+                      <option disabled>Mesec</option>
                       <option>Januar</option>
                     </select>
                   </div>
-                  <div class="basis-1/2">
-                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                      <option disabled selected>Leto</option>
+                  <div className="basis-1/2">
+                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Leto"}>
+                      <option disabled>Leto</option>
                       <option>1998</option>
                     </select>
                   </div>
@@ -67,13 +68,13 @@ function Home() {
               </div>
 
               <div>
-                <label for="last_name" class="block mb-2 text-sm font-medium">Priimek</label>
-                <input type="text" id="first_name" class="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Surname" required />
+                <label className="block mb-2 text-sm font-medium">Priimek</label>
+                <input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Surname" required />
               </div>
 
               <div>
-                <label for="last_name" class="block mb-2 text-sm font-medium">Spol</label>
-                <div class="flex flex-row">
+                <label className="block mb-2 text-sm font-medium">Spol</label>
+                <div className="flex flex-row">
                   <label className="label cursor-pointer mr-2 p-2.5">
                     <span className="label-text mr-1">Moški</span>
                     <input type="radio" name="radio-10" className="radio" />

@@ -1,11 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import CarCard from '../elements/CarCard';
+import CarBrandCard from '../elements/CarBrandCard';
+import CarModelCard from '../elements/CarModelCard';
 
 function Home() {
 
-  const [activeCardId, setActiveCardId] = React.useState("");
+  const [activeCarBrandId, setActiveCarBrandId] = React.useState("");
+  const [activeCarModelId, setActiveCarModelId] = React.useState("");
 
   return (
     <React.Fragment>
@@ -23,15 +25,86 @@ function Home() {
             { id: "2", title: "ŠPORTNIK", src: "/images/car-fast.png" },
             { id: "3", title: "SUV", src: "/images/car-suv.png" }
           ].map(card => (
-            <CarCard
+            <CarBrandCard
               key={card.id}
               id={card.id}
               title={card.title}
               src={card.src}
-              activeCardId={activeCardId}
-              setActiveCardId={setActiveCardId}
+              activeCardId={activeCarBrandId}
+              setActiveCardId={setActiveCarBrandId}
             />
           ))}
+        </div>
+
+        <div className="grid grid-cols-6 gap-10">
+          {[
+            { id: "1", brand: "Mercedes", model: "C180", src: "/images/logos/mercedes.png" },
+            { id: "2", brand: "Audi", model: "A5", src: "/images/logos/audi.png" },
+            { id: "3", brand: "Toyota", model: "Avensis", src: "/images/logos/toyota.png" },
+            { id: "4", brand: "Honda", model: "Accord", src: "/images/logos/honda.png" },
+            { id: "5", brand: "Skoda", model: "Octavia", src: "/images/logos/skoda.png" }
+          ].map(card => (
+            <CarModelCard
+              key={card.id}
+              id={card.id}
+              brand={card.brand}
+              model={card.model}
+              src={card.src}
+              activeCardId={activeCarModelId}
+              setActiveCardId={setActiveCarModelId}
+            />
+          ))}
+        </div>
+
+        <div className="card shadow-2xl mb-5">
+          <div className="card-body">
+            <h2 className="card-title">Prevzem in vračilo</h2>
+
+            <div className="flex flex-row">
+              <div className="basis-1/4 mr-2">
+                <label className="block mb-2 text-sm font-medium">Mesto prevzema</label>
+                <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Dan"}>
+                  <option disabled>Prevzem</option>
+                  <option>Ljubljana</option>
+                  <option>Maribor</option>
+                  <option>Celje</option>
+                  <option>Kranj</option>
+                  <option>Velenje</option>
+                  <option>Koper</option>
+                  <option>Novo Mesto</option>
+                  <option>Murska Sobota</option>
+                  <option>Murska Sobota</option>
+                  <option>Jesenice</option>
+                  <option>Portorož</option>
+                  <option>Letališče Jožeta Pučnika</option>
+                  <option>Letališče Maribor</option>
+                </select>
+              </div>
+              <div className="basis-1/4 mr-2">
+                <label className="block mb-2 text-sm font-medium">Mesto vračila</label>
+                <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Mesec"}>
+                  <option disabled>Vračilo</option>
+                  <option>Ljubljana</option>
+                  <option>Maribor</option>
+                  <option>Celje</option>
+                  <option>Kranj</option>
+                  <option>Velenje</option>
+                  <option>Koper</option>
+                  <option>Novo Mesto</option>
+                  <option>Murska Sobota</option>
+                  <option>Murska Sobota</option>
+                  <option>Jesenice</option>
+                  <option>Portorož</option>
+                  <option>Letališče Jožeta Pučnika</option>
+                  <option>Letališče Maribor</option>
+                </select>
+              </div>
+              <div className="basis-1/2">
+                Fucking datepicker comes here!!!!
+              </div>
+            </div>
+
+          </div>
         </div>
 
         <div className="card shadow-2xl">

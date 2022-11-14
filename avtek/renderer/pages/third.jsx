@@ -48,55 +48,70 @@ export default function Third() {
 				<div className="card shadow-2xl">
 					<div className="card-body">
 						<h2 className="card-title">Osebni podatki</h2>
-						<div className="grid gap-6 gap-x-20 mb-12 md:grid-cols-2">
-							<div>
-								<label className="block mb-2 text-sm font-medium">Ime</label>
-								<input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Name" required />
+						<div className="grid gap-6 gap-x-20 mb-6 md:grid-cols-2">
+							<div className="flex flex-col gap-4">
+								<div>
+									<label className="block mb-2 text-sm font-medium">Ime</label>
+									<input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Name" required />
+								</div>
+								<div>
+									<label className="block mb-2 text-sm font-medium">Priimek</label>
+									<input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Surname" required />
+								</div>
+
 							</div>
 
-							<div>
-								<label className="block mb-2 text-sm font-medium">Datum rojstva</label>
-								<div className="flex flex-row">
-									<div className="basis-1/4 mr-2">
-										<select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Dan"}>
-											<option disabled>Dan</option>
-											<option>1</option>
-										</select>
+							<div className="flex flex-col gap-4">
+								<div>
+									<label className="block mb-2 text-sm font-medium">Datum rojstva</label>
+									<div className="flex flex-row">
+										<div className="basis-1/4 mr-2">
+											<select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Dan"}>
+												<option disabled>Dan</option>
+												<option>1</option>
+											</select>
+										</div>
+										<div className="basis-1/4 mr-2">
+											<select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Mesec"}>
+												<option disabled>Mesec</option>
+												<option>Januar</option>
+											</select>
+										</div>
+										<div className="basis-1/2">
+											<select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Leto"}>
+												<option disabled>Leto</option>
+												<option>1998</option>
+											</select>
+										</div>
 									</div>
-									<div className="basis-1/4 mr-2">
-										<select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Mesec"}>
-											<option disabled>Mesec</option>
-											<option>Januar</option>
-										</select>
-									</div>
-									<div className="basis-1/2">
-										<select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Leto"}>
-											<option disabled>Leto</option>
-											<option>1998</option>
-										</select>
+								</div>
+
+								<div>
+									<label className="block mb-2 text-sm font-medium">Spol</label>
+									<div className="flex flex-row">
+										<label className="label cursor-pointer mr-5">
+											<input type="radio" name="radio-10" className="radio mr-2" />
+											<span className="label-text mr-1">Moški</span>
+										</label>
+										<label className="label cursor-pointer mr-5">
+											<input type="radio" name="radio-10" className="radio mr-2" />
+											<span className="label-text mr-1">Ženska</span>
+										</label>
 									</div>
 								</div>
 							</div>
+						</div>
 
-							<div>
-								<label className="block mb-2 text-sm font-medium">Priimek</label>
-								<input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Surname" required />
-							</div>
-
-							<div>
-								<label className="block mb-2 text-sm font-medium">Spol</label>
-								<div className="flex flex-row">
-									<label className="label cursor-pointer mr-2 p-2.5">
-										<span className="label-text mr-1">Moški</span>
-										<input type="radio" name="radio-10" className="radio" />
-									</label>
-									<label className="label cursor-pointer">
-										<span className="label-text mr-1">Ženska</span>
-										<input type="radio" name="radio-10" className="radio" />
-									</label>
+						<div className="mb-6">
+							<label className="block mb-2 text-sm font-medium">Naslov in poštna številka</label>
+							<div className="flex flex-row">
+								<div className="basis-1/3 mr-2">
+									<input type="text" id="postal_code" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Pošta" required />
+								</div>
+								<div className="basis-2/3 mr-2">
+									<input type="text" id="address" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Naslov" required />
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>

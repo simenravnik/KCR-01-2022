@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Nav from '../elements/Nav';
 
 export default function Second() {
 
@@ -11,12 +10,39 @@ export default function Second() {
         <title>Avtek</title>
       </Head>
 
-      <div className="container mx-auto px-2 py-5">
+      <div className="container mx-auto px-5 py-5">
 
         <h1 className="font-alfa font-regular leading-tight text-5xl mt-0">AVTEK.si</h1>
 
         <div className="mb-5">
-          <Nav />
+          <div className="text-sm breadcrumbs">
+            <ul>
+              <li>
+                <Link href='/home'>
+                  <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    Domov
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/second'>
+                  <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    Podatki o vozilu
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/third'>
+                  <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    Osebni podatki
+                  </a>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="grid grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -47,7 +73,7 @@ export default function Second() {
                 <label className="block mb-2 text-sm font-medium">Menjalnik</label>
                 <div className="flex flex-row">
                   <label className="label cursor-pointer mr-5">
-                    <input type="radio" name="radio-1" className="radio mr-2" />
+                    <input type="radio" checked name="radio-1" className="radio mr-2" />
                     <span className="label-text">Ročni</span>
                   </label>
                   <label className="label cursor-pointer">
@@ -65,7 +91,7 @@ export default function Second() {
                     <span className="label-text">Bencinski</span>
                   </label>
                   <label className="label cursor-pointer">
-                    <input type="radio" name="radio-10" className="radio mr-2" />
+                    <input type="radio" checked name="radio-10" className="radio mr-2" />
                     <span className="label-text">Dizelski</span>
                   </label>
                 </div>

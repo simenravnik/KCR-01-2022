@@ -1,8 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import CarBrandCard from '../elements/CarBrandCard';
-import CarModelCard from '../elements/CarModelCard';
 
 function Home() {
 
@@ -36,38 +34,73 @@ function Home() {
         <title>Avtek</title>
       </Head>
 
-      <div className="container mx-auto px-2 py-5">
+      <div className="container mx-auto px-5 py-5">
 
-        <h1 className="font-alfa font-regular leading-tight text-5xl mt-0 mb-2">AVTEK.si</h1>
+        <h1 className="font-alfa font-regular leading-tight text-5xl mt-0">AVTEK.si</h1>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="mb-5">
+          <div className="text-sm breadcrumbs">
+            <ul>
+              <li>
+                <Link href='/home'>
+                  <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    Domov
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/second'>
+                  <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    Podatki o vozilu
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/third'>
+                  <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                    Osebni podatki
+                  </a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-8">
           {[
             { id: "1", title: "OSNOVNI", src: "/images/car-normal.png" },
             { id: "2", title: "ŠPORTNIK", src: "/images/car-fast.png" },
             { id: "3", title: "SUV", src: "/images/car-suv.png" }
           ].map(card => (
-            <CarBrandCard
-              key={card.id}
-              id={card.id}
-              title={card.title}
-              src={card.src}
-              activeCardId={activeCarBrandId}
-              setActiveCardId={setActiveCarBrandId}
-            />
+            <div onClick={() => setActiveCarBrandId(card.id)} className={`card mb-5 hover:cursor-pointer ${activeCarBrandId === card.id ? "card border shadow-md" : ""}`}>
+              <div className='my-2 w-full flex flex-col justify-center'>
+                <img className={`object-contain ${activeCarBrandId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
+                <label className="block mb-2 text-xl justify-center text-center font-medium">{card.title}</label>
+              </div>
+            </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-6 gap-10">
-          {cars[activeCarBrandId].map(card => (
-            <CarModelCard
-              key={card.id}
-              id={card.id}
-              brand={card.brand}
-              model={card.model}
-              src={card.src}
-              activeCardId={activeCarModelId}
-              setActiveCardId={setActiveCarModelId}
-            />
+        <div className="grid grid-cols-7 gap-10">
+          {cars[activeCarBrandId].map((card) => (
+            <div onClick={() => setActiveCarModelId(card.id)} className={`card mb-5 hover:cursor-pointer ${activeCarModelId === card.id ? "card border shadow-md" : ""}`}>
+              <div className='my-2 w-full flex flex-col justify-center'>
+                <div>
+                  <img className={`object-contain ${activeCarModelId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
+                </div>
+                <div>
+                  <label className="block justify-center text-center">
+                    {card.brand}
+                    <div className="text-xl font-medium">
+                      {card.model}
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
 
@@ -121,8 +154,8 @@ function Home() {
 
             <div className='mt-1 flex justify-end'>
               <Link href='/second'>
-                <button className="btn">
-                  <a className='btn-blue'>Naprej</a>
+                <button className="btn btn-primary">
+                  <a>Naprej</a>
                 </button>
               </Link>
             </div>
@@ -130,61 +163,6 @@ function Home() {
           </div>
         </div>
 
-        <div className="card shadow-2xl">
-          <div className="card-body">
-            <h2 className="card-title">Osebni podatki</h2>
-            <div className="grid gap-6 gap-x-20 mb-12 md:grid-cols-2">
-              <div>
-                <label className="block mb-2 text-sm font-medium">Ime</label>
-                <input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Name" required />
-              </div>
-
-              <div>
-                <label className="block mb-2 text-sm font-medium">Datum rojstva</label>
-                <div className="flex flex-row">
-                  <div className="basis-1/4 mr-2">
-                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Dan"}>
-                      <option disabled>Dan</option>
-                      <option>1</option>
-                    </select>
-                  </div>
-                  <div className="basis-1/4 mr-2">
-                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Mesec"}>
-                      <option disabled>Mesec</option>
-                      <option>Januar</option>
-                    </select>
-                  </div>
-                  <div className="basis-1/2">
-                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Leto"}>
-                      <option disabled>Leto</option>
-                      <option>1998</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <label className="block mb-2 text-sm font-medium">Priimek</label>
-                <input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Surname" required />
-              </div>
-
-              <div>
-                <label className="block mb-2 text-sm font-medium">Spol</label>
-                <div className="flex flex-row">
-                  <label className="label cursor-pointer mr-2 p-2.5">
-                    <span className="label-text mr-1">Moški</span>
-                    <input type="radio" name="radio-10" className="radio" />
-                  </label>
-                  <label className="label cursor-pointer">
-                    <span className="label-text mr-1">Ženska</span>
-                    <input type="radio" name="radio-10" className="radio" />
-                  </label>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
       </div>
     </React.Fragment >
   );

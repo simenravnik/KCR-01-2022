@@ -2,31 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
-function Home() {
-
-  const [activeCarBrandId, setActiveCarBrandId] = React.useState("1");
-  const [activeCarModelId, setActiveCarModelId] = React.useState("1");
-
-  const cars = {
-    "1": [
-      { id: "1", brand: "Mercedes", model: "C180", src: "/images/logos/mercedes.png" },
-      { id: "2", brand: "Audi", model: "A5", src: "/images/logos/audi.png" },
-      { id: "3", brand: "Toyota", model: "Avensis", src: "/images/logos/toyota.png" },
-      { id: "4", brand: "Honda", model: "Accord", src: "/images/logos/honda.png" },
-      { id: "5", brand: "Skoda", model: "Octavia", src: "/images/logos/skoda.png" }
-    ],
-    "2": [
-      { id: "1", brand: "Lamborgini", model: "Aventador", src: "/images/logos/lamborgini.png" },
-      { id: "2", brand: "Ferrari", model: "488", src: "/images/logos/ferrari.png" },
-      { id: "3", brand: "Porsche", model: "911", src: "/images/logos/porsche.png" },
-    ],
-    "3": [
-      { id: "1", brand: "Jeep", model: "Wrangler", src: "/images/logos/jeep.png" },
-      { id: "2", brand: "Land Rover", model: "Defender", src: "/images/logos/land-rover.png" },
-      { id: "3", brand: "Toyota", model: "4runner", src: "/images/logos/toyota.png" },
-      { id: "4", brand: "Suzuki", model: "Jimny", src: "/images/logos/suzuki.png" },
-    ],
-  }
+function Home(props) {
 
   return (
     <React.Fragment>
@@ -78,14 +54,10 @@ function Home() {
         </div>
 
         <div className="grid grid-cols-3 gap-8">
-          {[
-            { id: "1", title: "OSNOVNI", src: "/images/car-normal.png" },
-            { id: "2", title: "ŠPORTNIK", src: "/images/car-fast.png" },
-            { id: "3", title: "SUV", src: "/images/car-suv.png" }
-          ].map(card => (
-            <div onClick={() => setActiveCarBrandId(card.id)} className={`card mb-5 hover:cursor-pointer ${activeCarBrandId === card.id ? "card border shadow-md" : ""}`}>
+          {props.brands.map(card => (
+            <div onClick={() => props.setActiveCarBrandId(card.id)} className={`card mb-5 hover:cursor-pointer ${props.activeCarBrandId === card.id ? "card border shadow-md" : ""}`}>
               <div className='my-2 w-full flex flex-col justify-center'>
-                <img className={`object-contain ${activeCarBrandId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
+                <img className={`object-contain ${props.activeCarBrandId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
                 <label className="block mb-2 text-xl justify-center text-center font-medium">{card.title}</label>
               </div>
             </div>
@@ -93,11 +65,11 @@ function Home() {
         </div>
 
         <div className="grid grid-cols-7 gap-10">
-          {cars[activeCarBrandId].map((card) => (
-            <div onClick={() => setActiveCarModelId(card.id)} className={`card mb-5 hover:cursor-pointer ${activeCarModelId === card.id ? "card border shadow-md" : ""}`}>
+          {props.cars[props.activeCarBrandId].map((card) => (
+            <div onClick={() => props.setActiveCarModelId(card.id)} className={`card mb-5 hover:cursor-pointer ${props.activeCarModelId === card.id ? "card border shadow-md" : ""}`}>
               <div className='my-2 w-full flex flex-col justify-center'>
                 <div>
-                  <img className={`object-contain ${activeCarModelId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
+                  <img className={`object-contain ${props.activeCarModelId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
                 </div>
                 <div>
                   <label className="block justify-center text-center">

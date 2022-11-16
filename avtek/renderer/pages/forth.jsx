@@ -2,18 +2,11 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
-export default function Forth() {
-
-    const CARD = "card";
-    const CASH = "cash";
-    const [paymentType, setPaymentType] = useState(CARD);
-    const [cardNumber, setCardNumber] = useState("");
-    const [CVV, setCVV] = useState("");
-    const [progress, setProgress] = useState(70);
+export default function Forth(props) {
 
     const updatePaymentType = (type) => {
-        setPaymentType(type);
-        updateProgress(type, cardNumber, CVV);
+        props.setPaymentType(type);
+        updateProgress(type, props.cardNumber, props.CVV);
     }
 
     const updateCardNumber = (event) => {
@@ -33,12 +26,12 @@ export default function Forth() {
             let card = "";
             if (processedCardNumber !== null && processedCardNumber.length > 0) {
                 card = processedCardNumber.join('-')
-                setCardNumber(card);
+                props.setCardNumber(card);
             } else {
-                setCardNumber(card);
+                props.setCardNumber(card);
             }
 
-            updateProgress(paymentType, card, CVV);
+            updateProgress(props.paymentType, card, props.CVV);
         }
     }
 
@@ -49,10 +42,10 @@ export default function Forth() {
 
         if (newCVV.length < 4) {
             newCVV = `•`.repeat(newCVV.length) + newCVV.slice(newCVV.length);
-            setCVV(newCVV);
+            props.setCVV(newCVV);
         }
 
-        updateProgress(paymentType, cardNumber, newCVV);
+        updateProgress(props.paymentType, props.cardNumber, newCVV);
     }
 
 
@@ -60,9 +53,9 @@ export default function Forth() {
         setTimeout(
             () => {
                 if (type === "addition") {
-                    setProgress(oldVal + i);
+                    props.setProgress(oldVal + i);
                 } else if (type === "substraction") {
-                    setProgress(oldVal - i);
+                    props.setProgress(oldVal - i);
                 }
             },
             20 * (i + 1)
@@ -78,15 +71,15 @@ export default function Forth() {
 
     const updateProgress = (type, card, cvv) => {
 
-        if (type === CASH) {
-            if (progress > 90) {
-                animateProgress(progress, 85, "substraction");
+        if (type === props.CASH) {
+            if (props.progress > 90) {
+                animateProgress(props.progress, 85, "substraction");
             } else {
-                animateProgress(progress, 85, "addition");
+                animateProgress(props.progress, 85, "addition");
             }
         }
 
-        if (type === CARD) {
+        if (type === props.CARD) {
 
             console.log(card.length);
 
@@ -94,26 +87,26 @@ export default function Forth() {
 
             if (card.length < 19) {
 
-                if (progress > 70) {
-                    animateProgress(progress, 70, "substraction");
+                if (props.progress > 70) {
+                    animateProgress(props.progress, 70, "substraction");
                 } else {
-                    animateProgress(progress, 70, "addition");
+                    animateProgress(props.progress, 70, "addition");
                 }
             }
 
             if (card.length >= 19) {
 
                 if (cvv.length >= 3) {
-                    if (progress > 95) {
-                        animateProgress(progress, 90, "substraction");
+                    if (props.progress > 95) {
+                        animateProgress(props.progress, 90, "substraction");
                     } else {
-                        animateProgress(progress, 90, "addition");
+                        animateProgress(props.progress, 90, "addition");
                     }
                 } else {
-                    if (progress > 85) {
-                        animateProgress(progress, 85, "substraction");
+                    if (props.progress > 85) {
+                        animateProgress(props.progress, 85, "substraction");
                     } else {
-                        animateProgress(progress, 85, "addition");
+                        animateProgress(props.progress, 85, "addition");
                     }
                 }
             }
@@ -121,7 +114,7 @@ export default function Forth() {
     }
 
     const submit = () => {
-        animateProgress(progress, 100, "addition");
+        animateProgress(props.progress, 100, "addition");
     }
 
 
@@ -260,11 +253,11 @@ export default function Forth() {
                                         <label className="block mb-2 text-sm font-medium">Način plačila</label>
                                         <div className="flex flex-row">
                                             <label className="label cursor-pointer mr-5">
-                                                <input type="radio" checked={paymentType === CASH} onChange={() => updatePaymentType(CASH)} name="radio-3" className="radio mr-2" />
+                                                <input type="radio" checked={props.paymentType === props.CASH} onChange={() => updatePaymentType(props.CASH)} name="radio-3" className="radio mr-2" />
                                                 <span className="label-text">Gotovina</span>
                                             </label>
                                             <label className="label cursor-pointer">
-                                                <input type="radio" checked={paymentType === CARD} onChange={() => updatePaymentType(CARD)} name="radio-3" className="radio mr-2" />
+                                                <input type="radio" checked={props.paymentType === props.CARD} onChange={() => updatePaymentType(props.CARD)} name="radio-3" className="radio mr-2" />
                                                 <span className="label-text">Plačilna kartica</span>
                                             </label>
                                         </div>
@@ -273,24 +266,24 @@ export default function Forth() {
                                         <label className="block mb-2 text-sm font-medium">Številka plačilne kartice</label>
                                         <div className="flex flex-row">
                                             <div className="basis-3/4 mr-2">
-                                                <input type="text" id="postal_code" disabled={paymentType === CASH} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value={cardNumber} onChange={updateCardNumber} placeholder="Plačilna kartica" required />
+                                                <input type="text" id="postal_code" disabled={props.paymentType === props.CASH} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value={props.cardNumber} onChange={updateCardNumber} placeholder="Plačilna kartica" required />
                                             </div>
                                             <div className="basis-1/4 mr-2">
-                                                <input type="text" id="address" disabled={paymentType === CASH} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value={CVV} onChange={updateCVV} placeholder="CCV" required />
+                                                <input type="text" id="address" disabled={props.paymentType === props.CASH} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value={props.CVV} onChange={updateCVV} placeholder="CCV" required />
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="flex justify-center gap-10">
-                                        <div className={`radial-progress transition-all ease-out duration-100 ${progress === 100 ? "text-success" : "text-primary"}`} style={{ "--value": progress, "--size": "10rem" }}>{
-                                            progress !== 100 ?
-                                                `${progress}%`
+                                        <div className={`radial-progress transition-all ease-out duration-100 ${props.progress === 100 ? "text-success" : "text-primary"}`} style={{ "--value": props.progress, "--size": "10rem" }}>{
+                                            props.progress !== 100 ?
+                                                `${props.progress}%`
                                                 : "Hvala!"
                                         }
                                         </div>
                                     </div>
 
-                                    {progress === 100 ?
+                                    {props.progress === 100 ?
                                         <div>
                                             <div>
                                                 <div className="flex flex-row items-center">
@@ -341,10 +334,10 @@ export default function Forth() {
                             </div>
 
 
-                            {progress !== 100 ? <div className='mt-1 flex justify-end'>
+                            {props.progress !== 100 ? <div className='mt-1 flex justify-end'>
                                 <Link href='/forth'>
                                     <button type="submit" className="btn btn-primary" onClick={submit}>
-                                        {paymentType === CASH ? <a>Oddaj naročilo</a> : <a>Plačaj</a>}
+                                        {props.paymentType === props.CASH ? <a>Oddaj naročilo</a> : <a>Plačaj</a>}
                                     </button>
                                 </Link>
                             </div> :

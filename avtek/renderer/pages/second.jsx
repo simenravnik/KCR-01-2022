@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
-export default function Second() {
+export default function Second(props) {
 
   return (
     <React.Fragment>
@@ -65,13 +65,12 @@ export default function Second() {
                 <div className="flex flex-row items-center">
                   <div className="basis-1/4 mr-5">
                     <label className="label cursor-pointer">
-                      <img className={`object-contain`} src={"/images/logos/audi.png"} />
+                      <img className={`object-contain`} src={props.cars[props.activeCarBrandId][props.activeCarModelId].src} />
                     </label>
                   </div>
                   <div className="basis-3/4">
-                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Tip"}>
-                      <option disabled>Tip</option>
-                      <option>A5</option>
+                    <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={props.cars[props.activeCarBrandId][props.activeCarModelId].model}>
+                      <option>{props.cars[props.activeCarBrandId][props.activeCarModelId].model}</option>
                     </select>
                   </div>
                 </div>
@@ -81,11 +80,11 @@ export default function Second() {
                 <label className="block mb-2 text-sm font-medium">Menjalnik</label>
                 <div className="flex flex-row">
                   <label className="label cursor-pointer mr-5">
-                    <input type="radio" checked name="radio-1" className="radio mr-2" />
+                    <input type="radio" checked={props.transmission === "manual"} onChange={() => props.setTransmission("manual")} name="radio-1" className="radio mr-2" />
                     <span className="label-text">Ročni</span>
                   </label>
                   <label className="label cursor-pointer">
-                    <input type="radio" name="radio-1" className="radio mr-2" />
+                    <input type="radio" checked={props.transmission === "automatic"} onChange={() => props.setTransmission("automatic")} name="radio-1" className="radio mr-2" />
                     <span className="label-text">Avtomatski</span>
                   </label>
                 </div>
@@ -95,11 +94,11 @@ export default function Second() {
                 <label className="block mb-2 text-sm font-medium">Tip motorja</label>
                 <div className="flex flex-row">
                   <label className="label cursor-pointer mr-5">
-                    <input type="radio" name="radio-10" className="radio mr-2" />
+                    <input type="radio" checked={props.engine === "gas"} onChange={() => props.setEngine("gas")} name="radio-10" className="radio mr-2" />
                     <span className="label-text">Bencinski</span>
                   </label>
                   <label className="label cursor-pointer">
-                    <input type="radio" checked name="radio-10" className="radio mr-2" />
+                    <input type="radio" checked={props.engine === "diesel"} onChange={() => props.setEngine("diesel")} name="radio-10" className="radio mr-2" />
                     <span className="label-text">Dizelski</span>
                   </label>
                 </div>
@@ -154,7 +153,7 @@ export default function Second() {
                 <div className="flex flex-row items-center">
                   <div className="basis-3/4">
                     <div className="flex flex-row items-center">
-                      <input type="checkbox" checked className="checkbox checkbox-primary mr-2" />
+                      <input type="checkbox" checked={props.assurance === true} onChange={() => props.setAssurance(!props.assurance)} className="checkbox checkbox-primary mr-2" />
 
                       <label className="label cursor-pointer">
                         Dodatno avtomobilsko zavarovanje
@@ -163,7 +162,7 @@ export default function Second() {
                   </div>
                   <div className="flex basis-1/4 justify-end">
                     <label className="label cursor-pointer">
-                      € 2.00
+                      € 2 &#215; 5 dni
                     </label>
                   </div>
                 </div>

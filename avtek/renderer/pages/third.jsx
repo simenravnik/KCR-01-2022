@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
-export default function Third() {
+export default function Third(props) {
 
 	return (
 		<React.Fragment>
@@ -60,11 +60,11 @@ export default function Third() {
 							<div className="flex flex-col gap-4">
 								<div>
 									<label className="block mb-2 text-sm font-medium">Ime</label>
-									<input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Name" required />
+									<input type="text" id="first_name" value={props.personalInfo.name} onChange={e => props.setPersonalInfo({ ...props.personalInfo, name: e.target.value })} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Name" required />
 								</div>
 								<div>
 									<label className="block mb-2 text-sm font-medium">Priimek</label>
-									<input type="text" id="first_name" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Surname" required />
+									<input type="text" id="first_name" value={props.personalInfo.surname} onChange={e => props.setPersonalInfo({ ...props.personalInfo, surname: e.target.value })} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Surname" required />
 								</div>
 
 							</div>
@@ -74,21 +74,34 @@ export default function Third() {
 									<label className="block mb-2 text-sm font-medium">Datum rojstva</label>
 									<div className="flex flex-row">
 										<div className="basis-1/4 mr-2">
-											<select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Dan"}>
+											<select value={props.personalInfo.birth_day} onChange={e => props.setPersonalInfo({ ...props.personalInfo, birth_day: e.target.value })} className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Dan"}>
 												<option disabled>Dan</option>
-												<option>1</option>
+												{Array.from({ length: 31 }, (_, index) => index + 1).map(i => (
+													<option>{i}</option>
+												))}
 											</select>
 										</div>
 										<div className="basis-1/4 mr-2">
-											<select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Mesec"}>
+											<select value={props.personalInfo.birth_month} onChange={e => props.setPersonalInfo({ ...props.personalInfo, birth_month: e.target.value })} className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Mesec"}>
 												<option disabled>Mesec</option>
 												<option>Januar</option>
+												<option>Februar</option>
+												<option>Marec</option>
+												<option>April</option>
+												<option>Maj</option>
+												<option>Junij</option>
+												<option>Julij</option>
+												<option>Avgust</option>
+												<option>September</option>
+												<option>Oktober</option>
+												<option>November</option>
+												<option>December</option>
 											</select>
 										</div>
 										<div className="basis-1/2">
-											<select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Leto"}>
+											<select value={props.personalInfo.birth_year} onChange={e => props.setPersonalInfo({ ...props.personalInfo, birth_year: e.target.value })} className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Leto"}>
 												<option disabled>Leto</option>
-												<option>1998</option>
+												<option> 1998</option>
 											</select>
 										</div>
 									</div>
@@ -98,11 +111,11 @@ export default function Third() {
 									<label className="block mb-2 text-sm font-medium">Spol</label>
 									<div className="flex flex-row">
 										<label className="label cursor-pointer mr-5">
-											<input type="radio" name="radio-10" className="radio mr-2" />
+											<input checked={props.transmission === "male"} onChange={() => props.setTransmission("male")} type="radio" name="radio-10" className="radio mr-2" />
 											<span className="label-text mr-1">Moški</span>
 										</label>
 										<label className="label cursor-pointer mr-5">
-											<input type="radio" name="radio-10" className="radio mr-2" />
+											<input checked={props.transmission === "female"} onChange={() => props.setTransmission("female")} type="radio" name="radio-10" className="radio mr-2" />
 											<span className="label-text mr-1">Ženska</span>
 										</label>
 									</div>
@@ -114,10 +127,10 @@ export default function Third() {
 							<label className="block mb-2 text-sm font-medium">Naslov in poštna številka</label>
 							<div className="flex flex-row">
 								<div className="basis-1/3 mr-2">
-									<input type="text" id="postal_code" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Pošta" required />
+									<input type="text" id="postal_code" value={props.personalInfo.post_code} onChange={e => props.setPersonalInfo({ ...props.personalInfo, post_code: e.target.value })} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Pošta" required />
 								</div>
 								<div className="basis-2/3 mr-2">
-									<input type="text" id="address" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Naslov" required />
+									<input type="text" id="address" value={props.personalInfo.address} onChange={e => props.setPersonalInfo({ ...props.personalInfo, address: e.target.value })} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Naslov" required />
 								</div>
 							</div>
 						</div>
@@ -128,20 +141,20 @@ export default function Third() {
 								<label className="block mb-2 text-sm font-medium">Telefonska številka</label>
 								<div className="flex flex-row">
 									<div className="basis-1/3">
-										<select className="select bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-l-lg rounded-r-none block w-full p-2.5" defaultValue={"+ 386 🇸🇮"}>
+										<select value={props.personalInfo.phone_prefix} onChange={e => props.setPersonalInfo({ ...props.personalInfo, phone_prefix: e.target.value })} className="select bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-l-lg rounded-r-none block w-full p-2.5" defaultValue={"+ 386 🇸🇮"}>
 											<option>+ 386 🇸🇮</option>
 											<option>+ 387</option>
 										</select>
 									</div>
 									<div className="basis-2/3 mr-2">
-										<input type="text" id="address" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-none rounded-r-lg block w-full p-2.5" placeholder="Telefon" required />
+										<input type="text" id="phone" value={props.personalInfo.phone_number} onChange={e => props.setPersonalInfo({ ...props.personalInfo, phone_number: e.target.value })} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-none rounded-r-lg block w-full p-2.5" placeholder="Telefon" required />
 									</div>
 								</div>
 							</div>
 
 							<div className="mb-6">
 								<label className="block mb-2 text-sm font-medium">E-poštni naslov</label>
-								<input type="text" id="address" className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="e-pošta" required />
+								<input type="text" id="mail" value={props.personalInfo.mail} onChange={e => props.setPersonalInfo({ ...props.personalInfo, mail: e.target.value })} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="e-pošta" required />
 							</div>
 						</div>
 

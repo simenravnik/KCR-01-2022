@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import BasicDatePicker from './components/BasicDatePicker';
 
 function Home(props) {
 
@@ -128,7 +129,8 @@ function Home(props) {
                 </select>
               </div>
               <div className="basis-1/2">
-                Fucking datepicker comes here!!!!
+                <label className="block mb-2 text-sm font-medium">Prevzem / Vračilo</label>
+                <BasicDatePicker />
               </div>
             </div>
 

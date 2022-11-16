@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a {
+    color: hsl(var(--nc));
+}
+
+a:hover {
+    color: hsl(var(--nc));
+}
+
+.ant-picker:hover {
+    cursor: pointer;
+    border-color: hsl(var(--b3));
+}
+
+.ant-picker-panel-container {
+    border-radius: 20px;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner {
+    background: hsl(var(--pf));
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+    background: hsl(var(--pf));
+}
+
+.ant-picker-time-panel-column > li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
+    background: hsl(var(--p));
+}
+
+.ant-btn-primary {
+    border: none;
+    border-radius: 10px;
+    background: hsl(var(--p));
+}
+
+.ant-btn-primary:hover {
+    background: hsl(var(--pf));
+}
+
+.ant-btn-primary > span {
+    color: hsl(var(--pc));
+}

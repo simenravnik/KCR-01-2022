@@ -12,16 +12,14 @@ export default function Forth() {
     const [progress, setProgress] = useState(70);
 
     const updatePaymentType = (type) => {
-
         setPaymentType(type);
+        updateProgress(type, cardNumber, CVV);
     }
 
     const updateCardNumber = (event) => {
         event.preventDefault();
 
-        let pressedKey = event.nativeEvent.data;
         let newCardNumber = event.target.value;
-
 
         newCardNumber = newCardNumber.replace(/-|\s/g, "");
 
@@ -32,14 +30,15 @@ export default function Forth() {
 
             let processedCardNumber = newCardNumber.match(/.{1,4}/g);
 
-            updateProgress();
-
+            let card = "";
             if (processedCardNumber !== null && processedCardNumber.length > 0) {
-                setCardNumber(processedCardNumber.join('-'));
+                card = processedCardNumber.join('-')
+                setCardNumber(card);
             } else {
-                setCardNumber("");
+                setCardNumber(card);
             }
 
+            updateProgress(paymentType, card, CVV);
         }
     }
 
@@ -52,27 +51,77 @@ export default function Forth() {
             newCVV = `•`.repeat(newCVV.length) + newCVV.slice(newCVV.length);
             setCVV(newCVV);
         }
+
+        updateProgress(paymentType, cardNumber, newCVV);
     }
 
 
-    function doSetTimeout(i) {
+    function doSetTimeout(i, oldVal, type) {
         setTimeout(
-            () => setProgress(i),
-            10 * (i + 1)
+            () => {
+                if (type === "addition") {
+                    setProgress(oldVal + i);
+                } else if (type === "substraction") {
+                    setProgress(oldVal - i);
+                }
+            },
+            20 * (i + 1)
         );
     }
 
-    const animateProgress = (oldVal, newVal) => {
+    const animateProgress = (oldVal, newVal, type = "addition") => {
         for (let i = 0; i <= Math.abs(oldVal - newVal); i++) {
-            doSetTimeout(i)
+            doSetTimeout(i, oldVal, type);
         }
     }
 
 
-    const updateProgress = () => {
-        if (cardNumber.length === 16) {
-            animateProgress(30, 90);
+    const updateProgress = (type, card, cvv) => {
+
+        if (type === CASH) {
+            if (progress > 90) {
+                animateProgress(progress, 85, "substraction");
+            } else {
+                animateProgress(progress, 85, "addition");
+            }
         }
+
+        if (type === CARD) {
+
+            console.log(card.length);
+
+            console.log(card);
+
+            if (card.length < 19) {
+
+                if (progress > 70) {
+                    animateProgress(progress, 70, "substraction");
+                } else {
+                    animateProgress(progress, 70, "addition");
+                }
+            }
+
+            if (card.length >= 19) {
+
+                if (cvv.length >= 3) {
+                    if (progress > 95) {
+                        animateProgress(progress, 90, "substraction");
+                    } else {
+                        animateProgress(progress, 90, "addition");
+                    }
+                } else {
+                    if (progress > 85) {
+                        animateProgress(progress, 85, "substraction");
+                    } else {
+                        animateProgress(progress, 85, "addition");
+                    }
+                }
+            }
+        }
+    }
+
+    const submit = () => {
+        animateProgress(progress, 100, "addition");
     }
 
 
@@ -127,84 +176,85 @@ export default function Forth() {
 
                 <div className="card shadow-2xl">
                     <div className="card-body">
-                        <h2 className="card-title">Plačilo</h2>
-                        <div className="grid gap-6 gap-x-20 mb-6 md:grid-cols-2">
+                        <form>
+                            <h2 className="card-title">Plačilo</h2>
+                            <div className="grid gap-6 gap-x-20 mb-6 md:grid-cols-2">
 
-                            <div className="card shadow-xl">
-                                <div className="card-body">
-                                    <div className="mb-5">
+                                <div className="card max-h-80 shadow-xl">
+                                    <div className="card-body">
+                                        <div className="mb-5">
+                                            <div className="flex flex-row items-center">
+                                                <div className="basis-3/4">
+                                                    <label className="label">
+                                                        € 95 &#215; 5 dni
+                                                    </label>
+                                                </div>
+                                                <div className="flex basis-1/4 justify-end">
+                                                    <label className="label">
+                                                        € 475.00
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-row items-center">
+                                                <div className="basis-3/4">
+                                                    <label className="label">
+                                                        Čiščenje avtomobila
+                                                    </label>
+                                                </div>
+                                                <div className="flex basis-1/4 justify-end">
+                                                    <label className="label">
+                                                        € 20.00
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-row items-center">
+                                                <div className="basis-3/4">
+                                                    <label className="label">
+                                                        Cena storitve
+                                                    </label>
+                                                </div>
+                                                <div className="flex basis-1/4 justify-end">
+                                                    <label className="label">
+                                                        € 31.00
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="mb-8">
+                                            <div className="flex flex-row items-center">
+                                                <div className="basis-3/4">
+                                                    <div className="flex flex-row items-center">
+
+                                                        <label className="label">
+                                                            Dodatno avtomobilsko zavarovanje
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div className="flex basis-1/4 justify-end">
+                                                    <label className="label">
+                                                        € 2.00
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="flex flex-row items-center">
                                             <div className="basis-3/4">
-                                                <label className="label">
-                                                    € 95 &#215; 5 dni
+                                                <label className="label font-bold">
+                                                    Skupaj
                                                 </label>
                                             </div>
                                             <div className="flex basis-1/4 justify-end">
-                                                <label className="label">
+                                                <label className="label font-bold">
                                                     € 475.00
                                                 </label>
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-row items-center">
-                                            <div className="basis-3/4">
-                                                <label className="label">
-                                                    Čiščenje avtomobila
-                                                </label>
-                                            </div>
-                                            <div className="flex basis-1/4 justify-end">
-                                                <label className="label">
-                                                    € 20.00
-                                                </label>
-                                            </div>
-                                        </div>
 
-                                        <div className="flex flex-row items-center">
-                                            <div className="basis-3/4">
-                                                <label className="label">
-                                                    Cena storitve
-                                                </label>
-                                            </div>
-                                            <div className="flex basis-1/4 justify-end">
-                                                <label className="label">
-                                                    € 31.00
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="mb-8">
-                                        <div className="flex flex-row items-center">
-                                            <div className="basis-3/4">
-                                                <div className="flex flex-row items-center">
-
-                                                    <label className="label">
-                                                        Dodatno avtomobilsko zavarovanje
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div className="flex basis-1/4 justify-end">
-                                                <label className="label">
-                                                    € 2.00
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-row items-center">
-                                        <div className="basis-3/4">
-                                            <label className="label font-bold">
-                                                Skupaj
-                                            </label>
-                                        </div>
-                                        <div className="flex basis-1/4 justify-end">
-                                            <label className="label font-bold">
-                                                € 475.00
-                                            </label>
-                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <form>
                                 <div className="flex flex-col gap-4">
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">Način plačila</label>
@@ -231,26 +281,86 @@ export default function Forth() {
                                         </div>
                                     </div>
 
-                                    <div className="flex justify-center">
-                                        <div className="radial-progress text-primary transition-all ease-out duration-1000" style={{ "--value": progress, "--size": "10rem" }}>{progress}%</div>
+                                    <div className="flex justify-center gap-10">
+                                        <div className={`radial-progress transition-all ease-out duration-100 ${progress === 100 ? "text-success" : "text-primary"}`} style={{ "--value": progress, "--size": "10rem" }}>{
+                                            progress !== 100 ?
+                                                `${progress}%`
+                                                : "Hvala!"
+                                        }
+                                        </div>
                                     </div>
 
+                                    {progress === 100 ?
+                                        <div>
+                                            <div>
+                                                <div className="flex flex-row items-center">
+                                                    <div className="basis-3/4">
+                                                        <label className="label">
+                                                            Lokacija prevzema
+                                                        </label>
+                                                    </div>
+                                                    <div className="flex basis-1/4 justify-end">
+                                                        <label className="label font-bold">
+                                                            Kranj
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-row items-center">
+                                                    <div className="basis-3/4">
+                                                        <label className="label">
+                                                            Datum prevzema
+                                                        </label>
+                                                    </div>
+                                                    <div className="flex basis-1/4 justify-end">
+                                                        <label className="label">
+                                                            16. 11. 2022
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-row items-center">
+                                                    <div className="basis-3/4">
+                                                        <label className="label">
+                                                            Čas prevzema
+                                                        </label>
+                                                    </div>
+                                                    <div className="flex basis-1/4 justify-end">
+                                                        <label className="label">
+                                                            13:00
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> : <></>
+                                    }
                                 </div>
-                            </form>
 
-                        </div>
 
-                        <div className='mt-1 flex justify-end'>
-                            <Link href='/forth'>
-                                <button className="btn btn-primary">
-                                    {paymentType === CASH ? <a>Oddaj naročilo</a> : <a>Plačaj</a>}
-                                </button>
-                            </Link>
-                        </div>
+
+                            </div>
+
+
+                            {progress !== 100 ? <div className='mt-1 flex justify-end'>
+                                <Link href='/forth'>
+                                    <button type="submit" className="btn btn-primary" onClick={submit}>
+                                        {paymentType === CASH ? <a>Oddaj naročilo</a> : <a>Plačaj</a>}
+                                    </button>
+                                </Link>
+                            </div> :
+                                <div className='mt-1 flex justify-end'>
+                                    <Link href='/home'>
+                                        <button className="btn btn-primary">
+                                            Zaključi
+                                        </button>
+                                    </Link>
+                                </div>
+                            }
+                        </form>
                     </div>
                 </div>
 
-            </div>
+            </div >
         </React.Fragment >
     );
 }

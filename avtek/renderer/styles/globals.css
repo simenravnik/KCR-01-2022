@@ -76,3 +76,7 @@ a:hover {
 .label-text-alt {
     color: red;
 }
+
+.unset {
+    pointer-events: none;
+}

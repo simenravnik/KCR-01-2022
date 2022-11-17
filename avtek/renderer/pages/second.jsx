@@ -75,20 +75,30 @@ export default function Second(props) {
                 </Link>
               </li>
               <li>
-                <Link href='/third'>
-                  <a>
+                {!props.visiblePages.third ?
+                  <a disabled className="unset">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                     Osebni podatki
                   </a>
-                </Link>
+                  : <Link href='/third'>
+                    <a>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                      Osebni podatki
+                    </a>
+                  </Link>}
               </li>
               <li>
-                <Link href='/forth'>
-                  <a>
+                {!props.visiblePages.forth ?
+                  <a disabled className="unset">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                     Plačilo
                   </a>
-                </Link>
+                  : <Link href='/forth'>
+                    <a>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                      Plačilo
+                    </a>
+                  </Link>}
               </li>
             </ul>
           </div>
@@ -154,12 +164,12 @@ export default function Second(props) {
                 <div className="flex flex-row items-center">
                   <div className="basis-3/4">
                     <label className="label cursor-pointer">
-                      € {calculatePricePerDay()} &#215; {props.carPickupInfo["rent_duration"]} dni
+                      € {calculatePricePerDay()} &#215; {props.carPickupInfo["rent_duration"]}.00 dni
                     </label>
                   </div>
                   <div className="flex basis-1/4 justify-end">
                     <label className="label cursor-pointer">
-                      € {calculatePrice()}
+                      € {calculatePrice()}.00
                     </label>
                   </div>
                 </div>
@@ -172,7 +182,7 @@ export default function Second(props) {
                   </div>
                   <div className="flex basis-1/4 justify-end">
                     <label className="label cursor-pointer">
-                      € {cleaningPrice}
+                      € {cleaningPrice}.00
                     </label>
                   </div>
                 </div>
@@ -185,7 +195,7 @@ export default function Second(props) {
                   </div>
                   <div className="flex basis-1/4 justify-end">
                     <label className="label cursor-pointer">
-                      € {servicePrice}
+                      € {servicePrice}.00
                     </label>
                   </div>
                 </div>
@@ -218,7 +228,7 @@ export default function Second(props) {
                 </div>
                 <div className="flex basis-1/4 justify-end">
                   <label className="label cursor-pointer font-bold">
-                    € {calculatePriceOverall()}
+                    € {calculatePriceOverall()}.00
                   </label>
                 </div>
               </div>

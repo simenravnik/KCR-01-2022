@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
@@ -156,6 +156,10 @@ export default function Third(props) {
 		}
 	}
 
+	useEffect(() => {
+		props.setVisiblePages((previousInputs) => ({ ...previousInputs, third: true }))
+	}, [])
+
 	return (
 		<React.Fragment>
 			<Head>
@@ -186,20 +190,30 @@ export default function Third(props) {
 								</Link>
 							</li>
 							<li>
-								<Link href='/third'>
-									<a>
+								{!props.visiblePages.third ?
+									<a disabled className="unset">
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
 										Osebni podatki
 									</a>
-								</Link>
+									: <Link href='/third'>
+										<a>
+											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+											Osebni podatki
+										</a>
+									</Link>}
 							</li>
 							<li>
-								<Link href='/forth'>
-									<a>
+								{!props.visiblePages.forth ?
+									<a disabled className="unset">
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
 										Plačilo
 									</a>
-								</Link>
+									: <Link href='/forth'>
+										<a>
+											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+											Plačilo
+										</a>
+									</Link>}
 							</li>
 						</ul>
 					</div>
@@ -212,7 +226,7 @@ export default function Third(props) {
 							<div className={`flex flex-col ${validation.name ? "gap-4" : ""} ${!(validation.birth_day && validation.birth_month && validation.birth_year) && validation.name ? "gap-8" : ""}`}>
 								<div>
 									<label className="block mb-2 text-sm font-medium">Ime</label>
-									<input type="text" id="first_name" value={props.personalInfo.name} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, name: e.target.value }); validateName(e.target.value); }} className={`input input-bordered ${validation.name ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="Name" required />
+									<input type="text" id="first_name" value={props.personalInfo.name} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, name: e.target.value }); validateName(e.target.value); }} className={`input input-bordered ${validation.name ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="Ime" required />
 									{!validation.name ?
 										<div className='relative w-100 h-200'>
 											<label className="label">
@@ -222,7 +236,7 @@ export default function Third(props) {
 								</div>
 								<div>
 									<label className="block mb-2 text-sm font-medium">Priimek</label>
-									<input type="text" id="first_name" value={props.personalInfo.surname} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, surname: e.target.value }); validateSurname(e.target.value); }} className={`input input-bordered ${validation.surname ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="Surname" required />
+									<input type="text" id="first_name" value={props.personalInfo.surname} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, surname: e.target.value }); validateSurname(e.target.value); }} className={`input input-bordered ${validation.surname ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="Priimek" required />
 									{!validation.surname ? <label className="label">
 										<span className="label-text-alt"></span>
 										<span className="label-text-alt"><p className='text-red-700'>Polje je obvezno</p></span>

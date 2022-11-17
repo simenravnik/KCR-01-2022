@@ -8,7 +8,7 @@ export default function BasicDatePicker(props) {
 
         console.log("Here", dateString[0]);
 
-        props.setCarPickupInfo({ ...props.carPickupInfo, rent_duration: (value[1].diff(value[0], 'hours') / 24) + 1, pickup_time: dateString[0], return_time: dateString[1], moment_time: value });
+        props.setCarPickupInfo({ ...props.carPickupInfo, rent_duration: (value[1].diff(value[0], 'hours') / 24) + 1, pickup_time: value[0].format(), return_time: value[1].format(), moment_time: value });
 
         console.log('Selected Time: ', value);
         console.log('Formatted Selected Time: ', dateString);

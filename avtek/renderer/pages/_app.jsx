@@ -41,6 +41,13 @@ function MyApp({ Component, pageProps }) {
     moment_time: [moment(), moment().add(5, 'days')],
   });
 
+  const [visiblePages, setVisiblePages] = useState({
+    first: true,
+    second: true,
+    third: false,
+    forth: false,
+  });
+
   const brands = [
     { id: "0", title: "OSNOVNI", src: "/images/car-normal.png" },
     { id: "1", title: "ŠPORTNIK", src: "/images/car-fast.png" },
@@ -96,6 +103,9 @@ function MyApp({ Component, pageProps }) {
       setPersonalInfo={setPersonalInfo}
       carPickupInfo={carPickupInfo}
       setCarPickupInfo={setCarPickupInfo}
+      visiblePages={visiblePages}
+      setVisiblePages={setVisiblePages}
+
     />
   );
 }

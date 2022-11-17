@@ -55,6 +55,20 @@ export default function Third(props) {
 		} else { setValidation((previousInputs) => ({ ...previousInputs, mail: true })); }
 	};
 
+	const validateMailRegex = (mail) => {
+		const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+		if (mail === '') {
+			setValidation((previousInputs) => ({ ...previousInputs, mail: false }));
+			return;
+		}
+
+		if (!re.test(mail)) {
+			setValidation((previousInputs) => ({ ...previousInputs, mail: false }));
+			return;
+		}
+	}
+
 	const validateBirthDay = (day) => {
 		if (day === "Dan") {
 			setValidation((previousInputs) => ({ ...previousInputs, birth_day: false }));
@@ -83,7 +97,40 @@ export default function Third(props) {
 		validateBirthDay(props.personalInfo.birth_day);
 		validateBirthMonth(props.personalInfo.birth_month);
 		validateBirthYear(props.personalInfo.birth_year);
+
+		validateMailRegex(props.personalInfo.mail)
+
 	};
+
+	const updatePostCode = (e) => {
+		e.preventDefault();
+
+		let newPostCode = e.target.value;
+		const re = /^[0-9\b]+$/;
+
+		if (newPostCode === '' || re.test(newPostCode)) {
+			if (newPostCode.length < 5) {
+
+				props.setPersonalInfo({ ...props.personalInfo, post_code: newPostCode });
+
+				validatePostalCode(e.target.value);
+			}
+		}
+	}
+
+	const updatePhone = (e) => {
+		e.preventDefault();
+
+		let newPhone = e.target.value;
+		const re = /^[0-9\b]+$/;
+
+		if (newPhone === '' || re.test(newPhone)) {
+			if (newPhone.length < 9) {
+				props.setPersonalInfo({ ...props.personalInfo, phone_number: newPhone });
+				validatePhone(e.target.value);
+			}
+		}
+	}
 
 	return (
 		<React.Fragment>
@@ -221,10 +268,10 @@ export default function Third(props) {
 						</div>
 
 						<div className={`${validation.postal_code && validation.address ? "mb-6" : ""}`}>
-							<label className="block mb-2 text-sm font-medium">Naslov in poštna številka</label>
+							<label className="block mb-2 text-sm font-medium">Poštna številka in naslov</label>
 							<div className="flex flex-row">
 								<div className="basis-1/3 mr-2">
-									<input type="text" id="postal_code" value={props.personalInfo.post_code} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, post_code: e.target.value }); validatePostalCode(e.target.value) }} className={`input input-bordered ${validation.postal_code ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="Pošta" required />
+									<input type="text" id="postal_code" value={props.personalInfo.post_code} onChange={e => { updatePostCode(e) }} className={`input input-bordered ${validation.postal_code ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="Pošta" required />
 									{!validation.postal_code ? <label className="label">
 										<span className="label-text-alt"></span>
 										<span className="label-text-alt"><p className='text-red-700'>Polje je obvezno</p></span>
@@ -253,7 +300,7 @@ export default function Third(props) {
 										</select>
 									</div>
 									<div className="basis-2/3 mr-2">
-										<input type="text" id="phone" value={props.personalInfo.phone_number} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, phone_number: e.target.value }); validatePhone(e.target.value); }} className={`input input-bordered ${validation.phone ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-r-lg rounded-l-none block w-full p-2.5`} placeholder="Telefon" required />
+										<input type="text" id="phone" value={props.personalInfo.phone_number} onChange={e => { updatePhone(e) }} className={`input input-bordered ${validation.phone ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-r-lg rounded-l-none block w-full p-2.5`} placeholder="Telefon" required />
 										{!validation.phone ? <label className="label">
 											<span className="label-text-alt"></span>
 											<span className="label-text-alt"><p className='text-red-700'>Polje je obvezno</p></span>
@@ -267,7 +314,7 @@ export default function Third(props) {
 								<input type="text" id="mail" value={props.personalInfo.mail} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, mail: e.target.value }); validateMail(e.target.value) }} className={`input nput-bordered ${validation.mail ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="e-pošta" required />
 								{!validation.mail ? <label className="label">
 									<span className="label-text-alt"></span>
-									<span className="label-text-alt"><p className='text-red-700'>Polje je obvezno</p></span>
+									<span className="label-text-alt"><p className='text-red-700'>Nepravilen vnos</p></span>
 								</label> : <></>}
 							</div>
 						</div>

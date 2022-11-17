@@ -178,6 +178,9 @@ export default function Forth(props) {
     };
 
     useEffect(() => {
+        if (props.progress !== 100) {
+            animateProgress(60, props.progress, "addition");
+        }
         props.setVisiblePages((previousInputs) => ({ ...previousInputs, forth: true }))
     }, [])
 

@@ -137,8 +137,8 @@ export default function Third(props) {
 				<div className="card shadow-2xl">
 					<div className="card-body">
 						<h2 className="card-title">Osebni podatki</h2>
-						<div className="grid gap-6 gap-x-20 mb-6 md:grid-cols-2">
-							<div className="flex flex-col gap-4">
+						<div className={`grid ${validation.surname ? "mb-6" : ""} gap-x-20 md:grid-cols-2`}>
+							<div className={`flex flex-col ${validation.name ? "gap-4" : ""}`}>
 								<div>
 									<label className="block mb-2 text-sm font-medium">Ime</label>
 									<input type="text" id="first_name" value={props.personalInfo.name} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, name: e.target.value }); validateName(e.target.value); }} className={`input input-bordered ${validation.name ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="Name" required />
@@ -159,7 +159,7 @@ export default function Third(props) {
 								</div>
 							</div>
 
-							<div className="flex flex-col gap-4">
+							<div className={`flex flex-col ${validation.birth_day && validation.birth_month && validation.birth_year ? "gap-4" : ""}`}>
 								<div>
 									<label className="block mb-2 text-sm font-medium">Datum rojstva</label>
 									<div className="flex flex-row">
@@ -191,7 +191,9 @@ export default function Third(props) {
 										<div className="basis-1/2">
 											<select value={props.personalInfo.birth_year} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, birth_year: e.target.value }); validateBirthYear(e.target.value); }} className={`select ${validation.birth_year ? "input-primary" : "input-error"} bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} defaultValue={"Leto"}>
 												<option disabled>Leto</option>
-												<option> 1998</option>
+												{Array.from({ length: 2022 }, (_, index) => index + 1).slice(1930, 2023).map(i => (
+													<option>{i}</option>
+												))}
 											</select>
 										</div>
 
@@ -218,7 +220,7 @@ export default function Third(props) {
 							</div>
 						</div>
 
-						<div className="mb-6">
+						<div className={`${validation.postal_code && validation.address ? "mb-6" : ""}`}>
 							<label className="block mb-2 text-sm font-medium">Naslov in poštna številka</label>
 							<div className="flex flex-row">
 								<div className="basis-1/3 mr-2">
@@ -239,8 +241,8 @@ export default function Third(props) {
 						</div>
 
 
-						<div className="grid gap-6 mb-2 gap-x-20 md:grid-cols-2">
-							<div className="mb-6">
+						<div className={`${(validation.phone && validation.mail) ? "mb-6" : ""} grid gap-6 gap-x-20 md:grid-cols-2`}>
+							<div>
 								<label className="block mb-2 text-sm font-medium">Telefonska številka</label>
 								<div className="flex flex-row">
 									<div className="basis-1/3">
@@ -260,7 +262,7 @@ export default function Third(props) {
 								</div>
 							</div>
 
-							<div className="mb-6">
+							<div>
 								<label className="block mb-2 text-sm font-medium">E-poštni naslov</label>
 								<input type="text" id="mail" value={props.personalInfo.mail} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, mail: e.target.value }); validateMail(e.target.value) }} className={`input nput-bordered ${validation.mail ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="e-pošta" required />
 								{!validation.mail ? <label className="label">

@@ -29,7 +29,7 @@ a:hover {
     border-radius: 15px;
 }
 
-.ant-picker-time-panel-column > li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
+.ant-picker-time-panel-column>li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
     background: hsl(var(--p));
     border-radius: 15px;
 }
@@ -44,7 +44,7 @@ a:hover {
     background: hsl(var(--pf));
 }
 
-.ant-btn-primary > span {
+.ant-btn-primary>span {
     color: hsl(var(--pc));
 }
 
@@ -71,4 +71,8 @@ a:hover {
 
 .ant-picker-cell .ant-picker-cell-in-view .ant-picker-cell-range-hover-end {
     border-radius: 15px;
+}
+
+.label-text-alt {
+    color: red;
 }

@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
     birth_day: "Dan",
     birth_month: "Mesec",
     birth_year: "Leto",
-    gender: "",
+    gender: "male",
     address: "",
     post_code: "",
     phone_prefix: "+ 386 🇸🇮",

@@ -75,17 +75,17 @@ function Home(props) {
           ))}
         </div>
 
-        <div className="grid grid-cols-7 gap-10">
+        <div className="grid grid-cols-8 gap-10">
           {props.cars[props.activeCarBrandId].map((card) => (
             <div onClick={() => props.setActiveCarModelId(card.id)} className={`card mb-5 hover:cursor-pointer ${props.activeCarModelId === card.id ? "card border shadow-md" : ""}`}>
-              <div className='my-2 w-full flex flex-col justify-center'>
+              <div className='my-2 flex flex-col justify-center'>
                 <div>
-                  <img className={`object-contain ${props.activeCarModelId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
+                  <img className={`object-contain p-1 ${props.activeCarModelId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
                 </div>
                 <div>
                   <label className="block justify-center text-center">
                     {card.brand}
-                    <div className="text-xl font-medium">
+                    <div className="text-l font-bold">
                       {card.model}
                     </div>
                   </label>

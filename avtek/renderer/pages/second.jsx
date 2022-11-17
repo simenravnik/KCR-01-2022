@@ -164,7 +164,7 @@ export default function Second(props) {
                 <div className="flex flex-row items-center">
                   <div className="basis-3/4">
                     <label className="label cursor-pointer">
-                      € {calculatePricePerDay()} &#215; {props.carPickupInfo["rent_duration"]}.00 dni
+                      € {calculatePricePerDay()} &#215; {props.carPickupInfo["rent_duration"]} dni
                     </label>
                   </div>
                   <div className="flex basis-1/4 justify-end">

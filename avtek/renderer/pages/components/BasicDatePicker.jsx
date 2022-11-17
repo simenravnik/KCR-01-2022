@@ -36,6 +36,7 @@ export default function BasicDatePicker(props) {
                     format="DD/MM/YYYY HH:mm"
                     onChange={onChange}
                     onOk={onOk}
+                    allowClear={false}
                     style={{ color: 'black' }}
                 />
             </div>

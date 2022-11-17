@@ -6,20 +6,13 @@ export default function BasicDatePicker(props) {
 
     const onChange = (value, dateString) => {
 
-        console.log("Here", dateString[0]);
-
         let durationDays = Math.round(value[1].diff(value[0], 'hours') / 24) + 1;
 
         props.setCarPickupInfo({ ...props.carPickupInfo, rent_duration: durationDays, pickup_time: value[0].format(), return_time: value[1].format(), moment_time: value });
-
-        console.log('Selected Time: ', value);
-        console.log('Formatted Selected Time: ', dateString);
-
-        console.log(props.carPickupInfo);
     };
 
     const onOk = (value) => {
-        console.log('onOk: ', value);
+        // console.log('onOk: ', value);
     };
 
 

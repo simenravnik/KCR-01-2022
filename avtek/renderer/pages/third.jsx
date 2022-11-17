@@ -249,15 +249,15 @@ export default function Third(props) {
 									<label className="block mb-2 text-sm font-medium">Datum rojstva</label>
 									<div className="flex flex-row">
 										<div className="basis-2/12 mr-2">
-											<select value={props.personalInfo.birth_day} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, birth_day: e.target.value }); validateBirthDay(e.target.value); }} className={`select ${validation.birth_day ? "input-primary" : "input-error"} bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} defaultValue={"Dan"}>
+											<select value={props.personalInfo.birth_day} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, birth_day: e.target.value }); validateBirthDay(e.target.value); }} className={`select ${validation.birth_day ? "input-primary" : "input-error"} bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`}>
 												<option disabled>Dan</option>
 												{Array.from({ length: 31 }, (_, index) => index + 1).map(i => (
-													<option>{i}</option>
+													<option key={i}>{i}</option>
 												))}
 											</select>
 										</div>
 										<div className="basis-4/12 mr-2">
-											<select value={props.personalInfo.birth_month} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, birth_month: e.target.value }); validateBirthMonth(e.target.value); }} className={`select ${validation.birth_month ? "input-primary" : "input-error"} bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} defaultValue={"Mesec"}>
+											<select value={props.personalInfo.birth_month} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, birth_month: e.target.value }); validateBirthMonth(e.target.value); }} className={`select ${validation.birth_month ? "input-primary" : "input-error"} bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`}>
 												<option disabled>Mesec</option>
 												<option>Januar</option>
 												<option>Februar</option>
@@ -274,10 +274,10 @@ export default function Third(props) {
 											</select>
 										</div>
 										<div className="basis-1/2">
-											<select value={props.personalInfo.birth_year} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, birth_year: e.target.value }); validateBirthYear(e.target.value); }} className={`select ${validation.birth_year ? "input-primary" : "input-error"} bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} defaultValue={"Leto"}>
+											<select value={props.personalInfo.birth_year} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, birth_year: e.target.value }); validateBirthYear(e.target.value); }} className={`select ${validation.birth_year ? "input-primary" : "input-error"} bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`}>
 												<option disabled>Leto</option>
 												{Array.from({ length: 2022 }, (_, index) => index + 1).slice(1930, 2023).map(i => (
-													<option>{i}</option>
+													<option key={i}>{i}</option>
 												))}
 											</select>
 										</div>
@@ -328,7 +328,7 @@ export default function Third(props) {
 								<label className="block mb-2 text-sm font-medium">Telefonska številka</label>
 								<div className="flex flex-row">
 									<div className="basis-1/3">
-										<select value={props.personalInfo.phone_prefix} onChange={e => props.setPersonalInfo({ ...props.personalInfo, phone_prefix: e.target.value })} className="select bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-l-lg rounded-r-none block w-full p-2.5" defaultValue={"+ 386 🇸🇮"}>
+										<select value={props.personalInfo.phone_prefix} onChange={e => props.setPersonalInfo({ ...props.personalInfo, phone_prefix: e.target.value })} className="select bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-l-lg rounded-r-none block w-full p-2.5">
 											<option>+ 1 🇺🇸</option>
 											<option>+ 33 🇫🇷</option>
 											<option>+ 39 🇮🇹</option>

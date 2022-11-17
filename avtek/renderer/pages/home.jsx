@@ -66,7 +66,7 @@ function Home(props) {
 
         <div className="grid grid-cols-3 gap-8">
           {props.brands.map(card => (
-            <div onClick={() => { props.setActiveCarBrandId(card.id); props.setActiveCarModelId("0") }} className={`card mb-5 hover:cursor-pointer ${props.activeCarBrandId === card.id ? "card border shadow-md" : ""}`}>
+            <div key={card.id} onClick={() => { props.setActiveCarBrandId(card.id); props.setActiveCarModelId("0") }} className={`card mb-5 hover:cursor-pointer ${props.activeCarBrandId === card.id ? "card border shadow-md" : ""}`}>
               <div className='my-2 w-full flex flex-col justify-center'>
                 <img className={`object-contain ${props.activeCarBrandId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
                 <label className="block mb-2 text-xl justify-center text-center font-medium">{card.title}</label>
@@ -77,7 +77,7 @@ function Home(props) {
 
         <div className="grid grid-cols-8 gap-10">
           {props.cars[props.activeCarBrandId].map((card) => (
-            <div onClick={() => props.setActiveCarModelId(card.id)} className={`card mb-5 hover:cursor-pointer ${props.activeCarModelId === card.id ? "card border shadow-md" : ""}`}>
+            <div key={card.id} onClick={() => props.setActiveCarModelId(card.id)} className={`card mb-5 hover:cursor-pointer ${props.activeCarModelId === card.id ? "card border shadow-md" : ""}`}>
               <div className='my-2 flex flex-col justify-center'>
                 <div>
                   <img className={`object-contain p-1 ${props.activeCarModelId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
@@ -102,7 +102,7 @@ function Home(props) {
             <div className="flex flex-row mb-5">
               <div className="basis-1/4 mr-2">
                 <label className="block mb-2 text-sm font-medium">Mesto prevzema</label>
-                <select value={props.carPickupInfo.pickup_location} onChange={e => props.setCarPickupInfo({ ...props.carPickupInfo, pickup_location: e.target.value })} className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Ljubljana"}>
+                <select value={props.carPickupInfo.pickup_location} onChange={e => props.setCarPickupInfo({ ...props.carPickupInfo, pickup_location: e.target.value })} className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                   <option>Ljubljana</option>
                   <option>Maribor</option>
                   <option>Celje</option>
@@ -120,7 +120,7 @@ function Home(props) {
               </div>
               <div className="basis-1/4 mr-2">
                 <label value={props.carPickupInfo.return_location} onChange={e => props.setCarPickupInfo({ ...props.carPickupInfo, return_location: e.target.value })} className="block mb-2 text-sm font-medium">Mesto vračila</label>
-                <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Ljubljana"}>
+                <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                   <option>Ljubljana</option>
                   <option>Maribor</option>
                   <option>Celje</option>

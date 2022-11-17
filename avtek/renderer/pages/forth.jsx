@@ -90,10 +90,6 @@ export default function Forth(props) {
 
         if (type === props.CARD) {
 
-            console.log(card.length);
-
-            console.log(card);
-
             if (card.length < 19) {
 
                 if (props.progress > 70) {
@@ -468,7 +464,6 @@ export default function Forth(props) {
                                             </div>
                                             <div className="flex basis-1/4 justify-end">
                                                 <label className="label">
-                                                    {console.log(props.carPickupInfo)}
                                                     {moment(props.carPickupInfo.pickup_time).format("DD. MM. YYYY")}
                                                 </label>
                                             </div>

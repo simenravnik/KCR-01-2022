@@ -66,7 +66,7 @@ function Home(props) {
 
         <div className="grid grid-cols-3 gap-8">
           {props.brands.map(card => (
-            <div onClick={() => props.setActiveCarBrandId(card.id)} className={`card mb-5 hover:cursor-pointer ${props.activeCarBrandId === card.id ? "card border shadow-md" : ""}`}>
+            <div onClick={() => { props.setActiveCarBrandId(card.id); props.setActiveCarModelId("0") }} className={`card mb-5 hover:cursor-pointer ${props.activeCarBrandId === card.id ? "card border shadow-md" : ""}`}>
               <div className='my-2 w-full flex flex-col justify-center'>
                 <img className={`object-contain ${props.activeCarBrandId === card.id ? "scale-100" : "scale-95"} hover:scale-100 ease-in duration-100`} src={card.src} />
                 <label className="block mb-2 text-xl justify-center text-center font-medium">{card.title}</label>

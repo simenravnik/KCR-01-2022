@@ -36,6 +36,8 @@ export default function Forth(props) {
             }
 
             updateProgress(props.paymentType, card, props.CVV);
+
+            validatePaymentCard(newCardNumber);
         }
     }
 
@@ -47,9 +49,12 @@ export default function Forth(props) {
         if (newCVV.length < 4) {
             newCVV = `•`.repeat(newCVV.length) + newCVV.slice(newCVV.length);
             props.setCVV(newCVV);
+
+            validateCVV(newCVV);
         }
 
         updateProgress(props.paymentType, props.cardNumber, newCVV);
+
     }
 
 
@@ -118,6 +123,16 @@ export default function Forth(props) {
     }
 
     const submit = () => {
+        if (props.paymentType === props.CARD) {
+            let p = validatePaymentCard(props.cardNumber);
+            let pl = validatePaymentCardLength(props.cardNumber);
+            let c = validateCVV(props.CVV);
+            let cl = validateCVVLength(props.CVV);
+
+            if (!(p && c && pl && cl)) {
+                return;
+            }
+        }
         animateProgress(props.progress, 100, "addition");
     }
 
@@ -170,7 +185,11 @@ export default function Forth(props) {
     const CARD = "card";
     const CASH = "cash";
 
+    const [loading, setLoading] = useState(false);
+
     const resetAndReturn = () => {
+
+        setLoading(true);
 
         props.setActiveCarBrandId("0");
         props.setActiveCarModelId("0");
@@ -213,13 +232,49 @@ export default function Forth(props) {
         router.push('/home');
     };
 
+
+    const [validation, setValidation] = useState(
+        {
+            paymentCard: true,
+            CVV: true,
+        }
+    );
+
+    const validatePaymentCard = (card) => {
+        if (card.length === 0) {
+            setValidation((previousInputs) => ({ ...previousInputs, paymentCard: false }));
+            return false;
+        } else { setValidation((previousInputs) => ({ ...previousInputs, paymentCard: true })); return true; }
+    };
+
+    const validatePaymentCardLength = (card) => {
+        if (card.length < 19) {
+            setValidation((previousInputs) => ({ ...previousInputs, paymentCard: false }));
+            return false;
+        } else { setValidation((previousInputs) => ({ ...previousInputs, paymentCard: true })); return true; }
+    };
+
+    const validateCVV = (card) => {
+        if (card.length === 0) {
+            setValidation((previousInputs) => ({ ...previousInputs, CVV: false }));
+            return false;
+        } else { setValidation((previousInputs) => ({ ...previousInputs, CVV: true })); return true; }
+    };
+
+    const validateCVVLength = (card) => {
+        if (card.length < 3) {
+            setValidation((previousInputs) => ({ ...previousInputs, CVV: false }));
+            return false;
+        } else { setValidation((previousInputs) => ({ ...previousInputs, CVV: true })); return true; }
+    };
+
     return (
         <React.Fragment>
             <Head>
                 <title>Avtek d.o.o.</title>
             </Head>
 
-            <div className="container mx-auto px-5 py-5">
+            {loading ? <></> : <div className="container mx-auto px-5 py-5">
 
                 <h1 className="font-alfa font-regular leading-tight text-5xl mt-0">AVTEK d.o.o.</h1>
 
@@ -370,10 +425,10 @@ export default function Forth(props) {
                                     <label className="block mb-2 text-sm font-medium">Številka plačilne kartice</label>
                                     <div className="flex flex-row">
                                         <div className="basis-3/4 mr-2">
-                                            <input type="text" id="postal_code" disabled={props.paymentType === props.CASH} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value={props.cardNumber} onChange={updateCardNumber} placeholder="Plačilna kartica" required />
+                                            <input type="text" id="postal_code" disabled={props.paymentType === props.CASH || props.progress === 100} className={`input bg-gray-50 ${validation.paymentCard ? "input-primary" : "input-error"} text-gray-900 text-sm rounded-lg block w-full p-2.5`} value={props.cardNumber} onChange={updateCardNumber} placeholder="Plačilna kartica" required />
                                         </div>
                                         <div className="basis-1/4 mr-2">
-                                            <input type="text" id="address" disabled={props.paymentType === props.CASH} className="input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value={props.CVV} onChange={updateCVV} placeholder="CCV" required />
+                                            <input type="text" id="address" disabled={props.paymentType === props.CASH || props.progress === 100} className={`input bg-gray-50 ${validation.CVV ? "input-primary" : "input-error"} text-gray-900 text-sm rounded-lg block w-full p-2.5`} value={props.CVV} onChange={updateCVV} placeholder="CCV" required />
                                         </div>
                                     </div>
                                 </div>
@@ -453,7 +508,7 @@ export default function Forth(props) {
                     </div>
                 </div>
 
-            </div >
+            </div >}
         </React.Fragment >
     );
 }

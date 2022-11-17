@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 export default function Third(props) {
+
+	const router = useRouter();
 
 	const [validation, setValidation] = useState(
 		{
@@ -22,37 +25,43 @@ export default function Third(props) {
 	const validateName = (name) => {
 		if (name.length === 0) {
 			setValidation((previousInputs) => ({ ...previousInputs, name: false }));
-		} else { setValidation((previousInputs) => ({ ...previousInputs, name: true })); }
+			return false;
+		} else { setValidation((previousInputs) => ({ ...previousInputs, name: true })); return true; }
 	};
 
 	const validateSurname = (name) => {
 		if (name.length === 0) {
 			setValidation((previousInputs) => ({ ...previousInputs, surname: false }));
-		} else { setValidation((previousInputs) => ({ ...previousInputs, surname: true })); }
+			return false;
+		} else { setValidation((previousInputs) => ({ ...previousInputs, surname: true })); return true; }
 	};
 
 	const validateAddress = (address) => {
 		if (address.length === 0) {
 			setValidation((previousInputs) => ({ ...previousInputs, address: false }));
-		} else { setValidation((previousInputs) => ({ ...previousInputs, address: true })); }
+			return false;
+		} else { setValidation((previousInputs) => ({ ...previousInputs, address: true })); return true; }
 	};
 
 	const validatePostalCode = (post) => {
 		if (post.length === 0) {
 			setValidation((previousInputs) => ({ ...previousInputs, postal_code: false }));
-		} else { setValidation((previousInputs) => ({ ...previousInputs, postal_code: true })); }
+			return false;
+		} else { setValidation((previousInputs) => ({ ...previousInputs, postal_code: true })); return true; }
 	};
 
 	const validatePhone = (phone) => {
 		if (phone.length === 0) {
 			setValidation((previousInputs) => ({ ...previousInputs, phone: false }));
-		} else { setValidation((previousInputs) => ({ ...previousInputs, phone: true })); }
+			return false;
+		} else { setValidation((previousInputs) => ({ ...previousInputs, phone: true })); return true; }
 	};
 
 	const validateMail = (mail) => {
 		if (mail.length === 0) {
 			setValidation((previousInputs) => ({ ...previousInputs, mail: false }));
-		} else { setValidation((previousInputs) => ({ ...previousInputs, mail: true })); }
+			return false;
+		} else { setValidation((previousInputs) => ({ ...previousInputs, mail: true })); return true; }
 	};
 
 	const validateMailRegex = (mail) => {
@@ -60,45 +69,60 @@ export default function Third(props) {
 
 		if (mail === '') {
 			setValidation((previousInputs) => ({ ...previousInputs, mail: false }));
-			return;
+			return false;
 		}
 
 		if (!re.test(mail)) {
 			setValidation((previousInputs) => ({ ...previousInputs, mail: false }));
-			return;
+			return false;
 		}
+
+		return true;
 	}
 
 	const validateBirthDay = (day) => {
 		if (day === "Dan") {
 			setValidation((previousInputs) => ({ ...previousInputs, birth_day: false }));
-		} else { setValidation((previousInputs) => ({ ...previousInputs, birth_day: true })); }
+			return false;
+		} else { setValidation((previousInputs) => ({ ...previousInputs, birth_day: true })); return true; }
 	};
 
 	const validateBirthMonth = (month) => {
 		if (month === "Mesec") {
 			setValidation((previousInputs) => ({ ...previousInputs, birth_month: false }));
-		} else { setValidation((previousInputs) => ({ ...previousInputs, birth_month: true })); }
+			return false;
+		} else { setValidation((previousInputs) => ({ ...previousInputs, birth_month: true })); return true; }
 	};
 
 	const validateBirthYear = (year) => {
 		if (year === "Leto") {
 			setValidation((previousInputs) => ({ ...previousInputs, birth_year: false }));
-		} else { setValidation((previousInputs) => ({ ...previousInputs, birth_year: true })); }
+			return false;
+		} else { setValidation((previousInputs) => ({ ...previousInputs, birth_year: true })); return true; }
 	};
 
 	const validateForm = () => {
-		validateName(props.personalInfo.name);
-		validateSurname(props.personalInfo.surname);
-		validateAddress(props.personalInfo.address);
-		validatePostalCode(props.personalInfo.post_code);
-		validatePhone(props.personalInfo.phone_number);
-		validateMail(props.personalInfo.mail);
-		validateBirthDay(props.personalInfo.birth_day);
-		validateBirthMonth(props.personalInfo.birth_month);
-		validateBirthYear(props.personalInfo.birth_year);
+		let n = validateName(props.personalInfo.name);
+		let s = validateSurname(props.personalInfo.surname);
+		let a = validateAddress(props.personalInfo.address);
+		let pc = validatePostalCode(props.personalInfo.post_code);
+		let p = validatePhone(props.personalInfo.phone_number);
+		let m = validateMail(props.personalInfo.mail);
+		let bd = validateBirthDay(props.personalInfo.birth_day);
+		let bm = validateBirthMonth(props.personalInfo.birth_month);
+		let by = validateBirthYear(props.personalInfo.birth_year);
 
-		validateMailRegex(props.personalInfo.mail)
+		let mr = validateMailRegex(props.personalInfo.mail);
+
+		let proceed = false;
+
+		if (n && s && a && pc && p && m && m && bd && bm && by && mr) {
+			proceed = true;
+		}
+
+		if (proceed) {
+			router.push('/forth')
+		}
 
 	};
 
@@ -185,7 +209,7 @@ export default function Third(props) {
 					<div className="card-body">
 						<h2 className="card-title">Osebni podatki</h2>
 						<div className={`grid ${validation.surname ? "mb-6" : ""} gap-x-20 md:grid-cols-2`}>
-							<div className={`flex flex-col ${validation.name ? "gap-4" : ""}`}>
+							<div className={`flex flex-col ${validation.name ? "gap-4" : ""} ${!(validation.birth_day && validation.birth_month && validation.birth_year) && validation.name ? "gap-8" : ""}`}>
 								<div>
 									<label className="block mb-2 text-sm font-medium">Ime</label>
 									<input type="text" id="first_name" value={props.personalInfo.name} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, name: e.target.value }); validateName(e.target.value); }} className={`input input-bordered ${validation.name ? "input-primary" : "input-error"} w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="Name" required />
@@ -206,7 +230,7 @@ export default function Third(props) {
 								</div>
 							</div>
 
-							<div className={`flex flex-col ${validation.birth_day && validation.birth_month && validation.birth_year ? "gap-4" : ""}`}>
+							<div className={`flex flex-col ${validation.birth_day && validation.birth_month && validation.birth_year ? "gap-4" : ""} ${!validation.name && validation.birth_day && validation.birth_month && validation.birth_year ? "gap-8" : ""}`}>
 								<div>
 									<label className="block mb-2 text-sm font-medium">Datum rojstva</label>
 									<div className="flex flex-row">
@@ -252,16 +276,13 @@ export default function Third(props) {
 								</div>
 
 								<div>
-									<label className="block mb-2 text-sm font-medium">Spol</label>
+									<label className="block mb-2 text-sm font-medium">Čas vozniškega izpita (v letih)</label>
 									<div className="flex flex-row">
-										<label className="label cursor-pointer mr-5">
-											<input checked={props.personalInfo.gender === "male"} onChange={() => props.setPersonalInfo({ ...props.personalInfo, gender: "male" })} type="radio" name="radio-120" className="radio mr-2" />
-											<span className="label-text mr-1">Moški</span>
-										</label>
-										<label className="label cursor-pointer mr-5">
-											<input checked={props.personalInfo.gender === "female"} onChange={() => props.setPersonalInfo({ ...props.personalInfo, gender: "female" })} type="radio" name="radio-120" className="radio mr-2" />
-											<span className="label-text mr-1">Ženska</span>
-										</label>
+										<div className="basis-1/4 mr-2">
+											<input type="number" id="licence" value={props.personalInfo.licence_length} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, licence_length: e.target.value }); }} className={`input input-bordered input-primary w-full bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} placeholder="Name" required />
+										</div>
+										<div className="basis-1/2">
+										</div>
 									</div>
 								</div>
 							</div>
@@ -294,9 +315,16 @@ export default function Third(props) {
 								<div className="flex flex-row">
 									<div className="basis-1/3">
 										<select value={props.personalInfo.phone_prefix} onChange={e => props.setPersonalInfo({ ...props.personalInfo, phone_prefix: e.target.value })} className="select bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-l-lg rounded-r-none block w-full p-2.5" defaultValue={"+ 386 🇸🇮"}>
+											<option>+ 1 🇺🇸</option>
+											<option>+ 33 🇫🇷</option>
+											<option>+ 39 🇮🇹</option>
+											<option>+ 43 🇦🇹</option>
+											<option>+ 44 🇬🇧</option>
+											<option>+ 49 🇩🇪</option>
+											<option>+ 381 🇷🇸</option>
+											<option>+ 385 🇭🇷</option>
 											<option>+ 386 🇸🇮</option>
-											<option>+ 387</option>
-											<option>+ 54</option>
+											<option>+ 387 🇧🇦</option>
 										</select>
 									</div>
 									<div className="basis-2/3 mr-2">

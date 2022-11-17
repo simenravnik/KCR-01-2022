@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
     phone_prefix: "+ 386 🇸🇮",
     phone_number: "",
     mail: "",
-
+    licence_length: 1,
   });
   const [carPickupInfo, setCarPickupInfo] = useState({
     pickup_location: "Ljubljana",

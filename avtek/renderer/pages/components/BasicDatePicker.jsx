@@ -31,7 +31,7 @@ export default function BasicDatePicker(props) {
                     }}
                     placeholder={["Prevzem", "Vračilo"]}
                     value={props.carPickupInfo["moment_time"]}
-                    format="DD. MM. YYYY HH:mm"
+                    format="DD/MM/YYYY HH:mm"
                     onChange={onChange}
                     onOk={onOk}
                     style={{ color: 'black' }}

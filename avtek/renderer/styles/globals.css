@@ -21,19 +21,22 @@ a:hover {
 
 .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner {
     background: hsl(var(--pf));
+    border-radius: 15px;
 }
 
 .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
     background: hsl(var(--pf));
+    border-radius: 15px;
 }
 
 .ant-picker-time-panel-column > li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
     background: hsl(var(--p));
+    border-radius: 15px;
 }
 
 .ant-btn-primary {
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     background: hsl(var(--p));
 }
 
@@ -43,4 +46,29 @@ a:hover {
 
 .ant-btn-primary > span {
     color: hsl(var(--pc));
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single):not(.ant-picker-cell-range-end) .ant-picker-cell-inner {
+    border-radius: 15px;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single):not(.ant-picker-cell-range-start) .ant-picker-cell-inner {
+    border-radius: 15px;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border-radius: 15px;
+    border-color: hsl(var(--pc));
+}
+
+.ant-picker-cell .ant-picker-cell-inner {
+    border-radius: 15px;
+}
+
+.ant-picker-cell .ant-picker-cell-inner {
+    border-radius: 15px;
+}
+
+.ant-picker-cell .ant-picker-cell-in-view .ant-picker-cell-range-hover-end {
+    border-radius: 15px;
 }

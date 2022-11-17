@@ -248,7 +248,7 @@ export default function Third(props) {
 								<div>
 									<label className="block mb-2 text-sm font-medium">Datum rojstva</label>
 									<div className="flex flex-row">
-										<div className="basis-1/4 mr-2">
+										<div className="basis-2/12 mr-2">
 											<select value={props.personalInfo.birth_day} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, birth_day: e.target.value }); validateBirthDay(e.target.value); }} className={`select ${validation.birth_day ? "input-primary" : "input-error"} bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} defaultValue={"Dan"}>
 												<option disabled>Dan</option>
 												{Array.from({ length: 31 }, (_, index) => index + 1).map(i => (
@@ -256,7 +256,7 @@ export default function Third(props) {
 												))}
 											</select>
 										</div>
-										<div className="basis-1/4 mr-2">
+										<div className="basis-4/12 mr-2">
 											<select value={props.personalInfo.birth_month} onChange={e => { props.setPersonalInfo({ ...props.personalInfo, birth_month: e.target.value }); validateBirthMonth(e.target.value); }} className={`select ${validation.birth_month ? "input-primary" : "input-error"} bg-gray-50 text-gray-900 text-sm rounded-lg block w-full p-2.5`} defaultValue={"Mesec"}>
 												<option disabled>Mesec</option>
 												<option>Januar</option>

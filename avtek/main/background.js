@@ -14,11 +14,13 @@ if (isProd) {
   await app.whenReady();
 
   const mainWindow = createWindow('main', {
-    width: 1000,
-    height: 600,
-    resizable: false,
-
+    width: 756,
+    height: 850,
+    minHeight: 1200,
+    minWidth: 1100,
   });
+
+  mainWindow.setAspectRatio(4 / 3);
 
   if (isProd) {
     await mainWindow.loadURL('app://./home.html');

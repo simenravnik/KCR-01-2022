@@ -333,7 +333,7 @@ export default function Forth(props) {
                 <div className="card shadow-2xl">
                     <div className="card-body">
                         <h2 className="card-title">Plačilo</h2>
-                        <div className="grid gap-6 gap-x-20 mb-6 md:grid-cols-2">
+                        <div className="grid gap-6 gap-x-20 mb-2 md:grid-cols-2">
 
                             <div className="card max-h-80 shadow-xl">
                                 <div className="card-body">
@@ -447,62 +447,56 @@ export default function Forth(props) {
 
                                 {props.progress === 100 ?
                                     <div>
-                                        <div>
-                                            <div className="flex flex-row items-center">
-                                                <div className="basis-3/4">
-                                                    <label className="label">
-                                                        Lokacija prevzema
-                                                    </label>
-                                                </div>
-                                                <div className="flex basis-1/4 justify-end">
-                                                    <label className="label font-bold">
-                                                        {props.carPickupInfo.pickup_location}
-                                                    </label>
-                                                </div>
+                                        <div className="flex flex-row items-center">
+                                            <div className="basis-3/4">
+                                                <label className="label">
+                                                    Lokacija prevzema
+                                                </label>
                                             </div>
-
-                                            <div className="flex flex-row items-center">
-                                                <div className="basis-3/4">
-                                                    <label className="label">
-                                                        Datum prevzema
-                                                    </label>
-                                                </div>
-                                                <div className="flex basis-1/4 justify-end">
-                                                    <label className="label">
-                                                        {console.log(props.carPickupInfo)}
-                                                        {moment(props.carPickupInfo.pickup_time).format("DD. MM. YYYY")}
-                                                    </label>
-                                                </div>
+                                            <div className="flex basis-1/4 justify-end">
+                                                <label className="label font-bold">
+                                                    {props.carPickupInfo.pickup_location}
+                                                </label>
                                             </div>
+                                        </div>
 
-                                            <div className="flex flex-row items-center">
-                                                <div className="basis-3/4">
-                                                    <label className="label">
-                                                        Čas prevzema
-                                                    </label>
-                                                </div>
-                                                <div className="flex basis-1/4 justify-end">
-                                                    <label className="label">
-                                                        {moment(props.carPickupInfo.pickup_time).format("HH:mm")}
-                                                    </label>
-                                                </div>
+                                        <div className="flex flex-row items-center">
+                                            <div className="basis-3/4">
+                                                <label className="label">
+                                                    Datum prevzema
+                                                </label>
+                                            </div>
+                                            <div className="flex basis-1/4 justify-end">
+                                                <label className="label">
+                                                    {console.log(props.carPickupInfo)}
+                                                    {moment(props.carPickupInfo.pickup_time).format("DD. MM. YYYY")}
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-row items-center">
+                                            <div className="basis-3/4">
+                                                <label className="label">
+                                                    Čas prevzema
+                                                </label>
+                                            </div>
+                                            <div className="flex basis-1/4 justify-end">
+                                                <label className="label">
+                                                    {moment(props.carPickupInfo.pickup_time).format("HH:mm")}
+                                                </label>
                                             </div>
                                         </div>
                                     </div> : <></>
                                 }
                             </div>
-
-
-
                         </div>
-
 
                         {props.progress !== 100 ? <div className='mt-1 flex justify-end'>
                             <button type="submit" className="btn btn-primary" onClick={submit}>
                                 {props.paymentType === props.CASH ? <a>Oddaj naročilo</a> : <a>Plačaj</a>}
                             </button>
                         </div> :
-                            <div className='mt-1 flex justify-end'>
+                            <div className='flex justify-end'>
                                 <button onClick={resetAndReturn} className="btn btn-primary">
                                     Zaključi
                                 </button>

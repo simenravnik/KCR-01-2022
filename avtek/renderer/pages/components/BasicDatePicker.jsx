@@ -2,11 +2,18 @@ import { DatePicker, Space } from 'antd';
 import React from 'react';
 const { RangePicker } = DatePicker;
 
-export default function BasicDatePicker() {
+export default function BasicDatePicker(props) {
 
     const onChange = (value, dateString) => {
+
+        console.log("Here", dateString[0]);
+
+        props.setCarPickupInfo({ ...props.carPickupInfo, rent_duration: (value[1].diff(value[0], 'hours') / 24) + 1, pickup_time: dateString[0], return_time: dateString[1], moment_time: value });
+
         console.log('Selected Time: ', value);
         console.log('Formatted Selected Time: ', dateString);
+
+        console.log(props.carPickupInfo);
     };
 
     const onOk = (value) => {
@@ -23,7 +30,8 @@ export default function BasicDatePicker() {
                         format: 'HH:mm',
                     }}
                     placeholder={["Prevzem", "Vračilo"]}
-                    format="YYYY-MM-DD HH:mm"
+                    value={props.carPickupInfo["moment_time"]}
+                    format="DD. MM. YYYY HH:mm"
                     onChange={onChange}
                     onOk={onOk}
                     style={{ color: 'black' }}

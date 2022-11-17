@@ -92,8 +92,7 @@ function Home(props) {
             <div className="flex flex-row mb-5">
               <div className="basis-1/4 mr-2">
                 <label className="block mb-2 text-sm font-medium">Mesto prevzema</label>
-                <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Dan"}>
-                  <option disabled>Prevzem</option>
+                <select value={props.carPickupInfo.pickup_location} onChange={e => props.setCarPickupInfo({ ...props.carPickupInfo, pickup_location: e.target.value })} className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Ljubljana"}>
                   <option>Ljubljana</option>
                   <option>Maribor</option>
                   <option>Celje</option>
@@ -110,9 +109,8 @@ function Home(props) {
                 </select>
               </div>
               <div className="basis-1/4 mr-2">
-                <label className="block mb-2 text-sm font-medium">Mesto vračila</label>
-                <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Mesec"}>
-                  <option disabled>Vračilo</option>
+                <label value={props.carPickupInfo.return_location} onChange={e => props.setCarPickupInfo({ ...props.carPickupInfo, return_location: e.target.value })} className="block mb-2 text-sm font-medium">Mesto vračila</label>
+                <select className="select bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={"Ljubljana"}>
                   <option>Ljubljana</option>
                   <option>Maribor</option>
                   <option>Celje</option>
@@ -130,7 +128,7 @@ function Home(props) {
               </div>
               <div className="basis-1/2">
                 <label className="block mb-2 text-sm font-medium">Prevzem / Vračilo</label>
-                <BasicDatePicker />
+                <BasicDatePicker carPickupInfo={props.carPickupInfo} setCarPickupInfo={props.setCarPickupInfo} />
               </div>
             </div>
 

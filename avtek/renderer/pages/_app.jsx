@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment'
 
 import 'antd/dist/antd.css';
 import '../styles/globals.css';
@@ -31,6 +32,14 @@ function MyApp({ Component, pageProps }) {
     mail: "",
 
   });
+  const [carPickupInfo, setCarPickupInfo] = useState({
+    pickup_location: "Ljubljana",
+    pickup_time: moment().format(),
+    return_location: "Ljubljana",
+    return_time: moment().add(5, 'days').format(),
+    rent_duration: 5,
+    moment_time: [moment(), moment().add(5, 'days')],
+  });
 
   const brands = [
     { id: "0", title: "OSNOVNI", src: "/images/car-normal.png" },
@@ -40,22 +49,22 @@ function MyApp({ Component, pageProps }) {
 
   const cars = {
     "0": [
-      { id: "0", brand: "Mercedes", model: "C180", src: "/images/logos/mercedes.png" },
-      { id: "1", brand: "Audi", model: "A5", src: "/images/logos/audi.png" },
-      { id: "2", brand: "Toyota", model: "Avensis", src: "/images/logos/toyota.png" },
-      { id: "3", brand: "Honda", model: "Accord", src: "/images/logos/honda.png" },
-      { id: "4", brand: "Skoda", model: "Octavia", src: "/images/logos/skoda.png" }
+      { id: "0", brand: "Mercedes", model: "C180", src: "/images/logos/mercedes.png", price: 95 },
+      { id: "1", brand: "Audi", model: "A5", src: "/images/logos/audi.png", price: 90 },
+      { id: "2", brand: "Toyota", model: "Avensis", src: "/images/logos/toyota.png", price: 75 },
+      { id: "3", brand: "Honda", model: "Accord", src: "/images/logos/honda.png", price: 70 },
+      { id: "4", brand: "Skoda", model: "Octavia", src: "/images/logos/skoda.png", price: 85 }
     ],
     "1": [
-      { id: "0", brand: "Lamborgini", model: "Aventador", src: "/images/logos/lamborgini.png" },
-      { id: "1", brand: "Ferrari", model: "488", src: "/images/logos/ferrari.png" },
-      { id: "2", brand: "Porsche", model: "911", src: "/images/logos/porsche.png" },
+      { id: "0", brand: "Lamborgini", model: "Aventador", src: "/images/logos/lamborgini.png", price: 120 },
+      { id: "1", brand: "Ferrari", model: "488", src: "/images/logos/ferrari.png", price: 125 },
+      { id: "2", brand: "Porsche", model: "911", src: "/images/logos/porsche.png", price: 115 },
     ],
     "2": [
-      { id: "0", brand: "Jeep", model: "Wrangler", src: "/images/logos/jeep.png" },
-      { id: "1", brand: "Land Rover", model: "Defender", src: "/images/logos/land-rover.png" },
-      { id: "2", brand: "Toyota", model: "4runner", src: "/images/logos/toyota.png" },
-      { id: "3", brand: "Suzuki", model: "Jimny", src: "/images/logos/suzuki.png" },
+      { id: "0", brand: "Jeep", model: "Wrangler", src: "/images/logos/jeep.png", price: 90 },
+      { id: "1", brand: "Land Rover", model: "Defender", src: "/images/logos/land-rover.png", price: 85 },
+      { id: "2", brand: "Toyota", model: "4runner", src: "/images/logos/toyota.png", price: 80 },
+      { id: "3", brand: "Suzuki", model: "Jimny", src: "/images/logos/suzuki.png", price: 65 },
     ],
   }
 
@@ -85,6 +94,8 @@ function MyApp({ Component, pageProps }) {
       setAssurance={setAssurance}
       personalInfo={personalInfo}
       setPersonalInfo={setPersonalInfo}
+      carPickupInfo={carPickupInfo}
+      setCarPickupInfo={setCarPickupInfo}
     />
   );
 }

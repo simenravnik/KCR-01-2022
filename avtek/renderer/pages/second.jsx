@@ -4,6 +4,47 @@ import Link from 'next/link';
 
 export default function Second(props) {
 
+  const cleaningPrice = 20;
+  const servicePrice = 31;
+
+  const calculatePricePerDay = () => {
+
+    let final_price = props.cars[props.activeCarBrandId][props.activeCarModelId].price;
+
+    if (props.transmission === "automatic") {
+      final_price = final_price + 3;
+    }
+
+    if (props.engine === "gas") {
+      final_price = final_price + 2;
+    }
+
+    return final_price;
+  };
+
+  const calculatePrice = () => {
+
+    let pricePerDay = calculatePricePerDay();
+    let final_price = pricePerDay * props.carPickupInfo["rent_duration"]
+
+    return final_price;
+  };
+
+  const calculatePriceOverall = () => {
+
+    let pricePerDay = calculatePricePerDay();
+    let final_price = pricePerDay * props.carPickupInfo["rent_duration"]
+
+    final_price = final_price + cleaningPrice;
+    final_price = final_price + servicePrice;
+
+    if (props.assurance === true) {
+      final_price = final_price + (2 * props.carPickupInfo["rent_duration"])
+    }
+
+    return final_price;
+  };
+
   return (
     <React.Fragment>
       <Head>
@@ -113,12 +154,12 @@ export default function Second(props) {
                 <div className="flex flex-row items-center">
                   <div className="basis-3/4">
                     <label className="label cursor-pointer">
-                      € 95 &#215; 5 dni
+                      € {calculatePricePerDay()} &#215; {props.carPickupInfo["rent_duration"]} dni
                     </label>
                   </div>
                   <div className="flex basis-1/4 justify-end">
                     <label className="label cursor-pointer">
-                      € 475.00
+                      € {calculatePrice()}
                     </label>
                   </div>
                 </div>
@@ -131,7 +172,7 @@ export default function Second(props) {
                   </div>
                   <div className="flex basis-1/4 justify-end">
                     <label className="label cursor-pointer">
-                      € 20.00
+                      € {cleaningPrice}
                     </label>
                   </div>
                 </div>
@@ -144,7 +185,7 @@ export default function Second(props) {
                   </div>
                   <div className="flex basis-1/4 justify-end">
                     <label className="label cursor-pointer">
-                      € 31.00
+                      € {servicePrice}
                     </label>
                   </div>
                 </div>
@@ -162,7 +203,9 @@ export default function Second(props) {
                   </div>
                   <div className="flex basis-1/4 justify-end">
                     <label className="label cursor-pointer">
-                      € 2 &#215; 5 dni
+                      <div className="flex flex-col text-right" >
+                        € 2 &#215; {props.carPickupInfo["rent_duration"]} dni
+                      </div>
                     </label>
                   </div>
                 </div>
@@ -175,7 +218,7 @@ export default function Second(props) {
                 </div>
                 <div className="flex basis-1/4 justify-end">
                   <label className="label cursor-pointer font-bold">
-                    € 475.00
+                    € {calculatePriceOverall()}
                   </label>
                 </div>
               </div>

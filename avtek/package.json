@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "my-nextron-app",
-  "description": "My application description",
+  "name": "avtek",
+  "description": "Application for renting cars",
   "version": "1.0.0",
-  "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
+  "author": "Simen Ravnik <ravnik.simen@gmail.com>",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",

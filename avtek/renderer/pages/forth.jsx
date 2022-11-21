@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import moment from 'moment'
 import { useRouter } from 'next/router'
+import { BiHelpCircle } from "react-icons/bi";
 
 export default function Forth(props) {
 
@@ -275,7 +276,32 @@ export default function Forth(props) {
 
             {loading ? <></> : <div className="container mx-auto px-5 py-5">
 
-                <h1 className="font-alfa font-regular leading-tight text-5xl mt-0">AVTEK d.o.o.</h1>
+                <div className="flex justify-between flex-row items-center">
+                    <h1 className="font-alfa font-regular leading-tight text-5xl mt-0">AVTEK d.o.o.</h1>
+                    <div className="text-3xl" >
+                        <div className="cursor-pointer scale-95 hover:scale-100 ease-in duration-100">
+                            <label htmlFor="my-modal" className="cursor-pointer">
+                                <BiHelpCircle> </BiHelpCircle>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="checkbox" id="my-modal" className="modal-toggle" />
+                <div className="modal bg-base-content bg-opacity-25">
+                    <div className="modal-box">
+                        <h3 className="font-bold text-lg">Navodila za uporabo</h3>
+                        <ul className="steps steps-vertical">
+                            <li className="step step-primary">Izbor vozila in datuma izposoje</li>
+                            <li className="step step-primary">Modifikacija karakteristik vozila</li>
+                            <li className="step step-primary">Obrazec za vnos osebnih podatkov</li>
+                            <li className="step step-primary">Zaključek in plačilo</li>
+                        </ul>
+                        <div className="modal-action">
+                            <label htmlFor="my-modal" className="btn btn-primary">OK</label>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="mb-5">
                     <div className="text-sm breadcrumbs">

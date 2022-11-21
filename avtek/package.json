@@ -17,7 +17,8 @@
     "electron-store": "^8.1.0",
     "i": "^0.3.7",
     "moment": "^2.29.4",
-    "npm": "^8.19.3"
+    "npm": "^8.19.3",
+    "react-icons": "^4.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

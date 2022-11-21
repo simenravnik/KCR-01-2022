@@ -1,38 +1,17 @@
-<p align="center"><img src="https://i.imgur.com/P08L8HO.png"></p>
-
-## Usage
-
-### Create an App
+# Avtek
+## Install Dependencies
 
 ```
-# with npx
-$ npx create-nextron-app my-app --example with-javascript-tailwindcss
-
-# with yarn
-$ yarn create nextron-app my-app --example with-javascript-tailwindcss
-
-# with pnpx
-$ pnpx create-nextron-app my-app --example with-javascript-tailwindcss
+$ cd avtek
+$ npm install
 ```
 
-### Install Dependencies
-
-```
-$ cd my-app
-
-# using yarn or npm
-$ yarn (or `npm install`)
-
-# using pnpm
-$ pnpm install --shamefully-hoist
-```
-
-### Use it
+## Use it
 
 ```
 # development mode
-$ yarn dev (or `npm run dev` or `pnpm run dev`)
+$ npm run dev
 
 # production build
-$ yarn build (or `npm run build` or `pnpm run build`)
+$ npm run build
 ```
